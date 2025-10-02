@@ -38,10 +38,5 @@
 				}
 			]
 		}
-	],
-	"functions": {
-		"src/**": {
-			"includeFiles": "src/**"
-		}
-	}
+	]
 }
