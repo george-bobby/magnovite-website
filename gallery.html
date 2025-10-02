@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Gallery - Magnovite'25</title>
+		<link
+			rel="icon"
+			type="image/png"
+			href="./public/magnovite.png"
+			sizes="32x32 64x64 128x128 192x192"
+		/>
+		<link
+			rel="apple-touch-icon"
+			href="./public/magnovite.png"
+			sizes="180x180"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./src/style.css" />
+		<style>
+			/* CSS merged and modified for Black-Violet color scheme and new layout structure */
+
+			/* Color and Animation Variables */
+			:root {
+				--ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+				--bg-dark: #000000; /* Deep Black */
+				--accent-light: #c780ff; /* Soft Violet for description text/UI */
+				--accent-line: #9e3fff; /* Brighter Violet for loader line */
+				--accent-focus: #ff00ff; /* Bright Magenta/Violet for focus box/buttons */
+			}
+
+			@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+			*,
+			::before,
+			::after {
+				box-sizing: border-box;
+				border-style: solid;
+				border-width: 0;
+				margin: 0;
+				padding: 0;
+			}
+
+			html {
+				background: var(--bg-dark);
+			}
+
+			html,
+			body {
+				overscroll-behavior: none;
+				font-family: 'Montserrat', sans-serif;
+				overflow-x: hidden;
+				overflow-y: auto;
+				min-height: 100vh;
+			}
+
+			/* --- Professional Header Section --- */
+			#professional-header {
+				background: var(--bg-dark);
+				padding: 30px 32px;
+				text-align: center;
+				position: relative;
+				width: 100%;
+				z-index: 100;
+				box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+				border-bottom: 2px solid white;
+			}
+
+			#professional-header h1 {
+				font-size: 3.5rem;
+				font-weight: 700;
+				margin: 0;
+				padding: 0;
+				letter-spacing: 0.3em;
+				text-transform: uppercase;
+				color: white;
+				line-height: 1;
+			}
+
+			#professional-header p {
+				font-size: 1.1rem;
+				color: var(--accent-light);
+				margin-top: 10px;
+			}
+
+			/* --- Application Content Overlay (Empty container for structure) --- */
+			.body-container {
+				position: relative;
+				width: 100%;
+				z-index: 10;
+			}
+
+			/* Loading animation removed */
+
+			/* --- New LLM Feature Modal Styles --- */
+			#image-detail-modal {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.9);
+				display: none; /* Hidden by default */
+				align-items: center;
+				justify-content: center;
+				z-index: 999;
+				backdrop-filter: blur(5px);
+				cursor: pointer; /* Indicate clickable */
+			}
+
+			.detail-container {
+				max-width: 90vw;
+				max-height: 90vh;
+				background: transparent;
+				border: none;
+				border-radius: 0;
+				padding: 0;
+				text-align: center;
+				box-shadow: none;
+				position: relative;
+				cursor: default;
+			}
+
+			/* Ensure the canvas remains visible as background */
+			.gallery-container {
+				background: transparent !important;
+			}
+			body > canvas {
+				z-index: 0 !important;
+			}
+		</style>
+	</head>
+	<body class="page-gallery">
+		<!-- Navigation (copied exactly from index.html) -->
+		<header class="header">
+			<div class="nav-container">
+				<nav class="nav-row">
+					<div class="nav-inner">
+						<a
+							href="https://www.christuniversity.in/"
+							target="_blank"
+							class="nav-logo-row"
+						>
+							<img
+								src="./public/christwhite.png"
+								alt="Christ University"
+								class="nav-logo-img"
+							/>
+						</a>
+						<div class="nav-menu">
+							<div class="nav-menu__links">
+								<a href="index.html#home" class="link nav-link">
+									<span class="nav-link-text">Home</span>
+									<svg
+										class="nav-link-arrow"
+										width="12"
+										height="12"
+										viewBox="0 0 12 12"
+										fill="none"
+									>
+										<path
+											d="M0.230469 5.09969H8.95047L4.57047 0.679688H7.03047L11.7705 5.41969V6.57969L7.03047 11.3197H4.57047L8.95047 6.85969H0.230469V5.09969Z"
+											fill="currentColor"
+										></path>
+									</svg>
+								</a>
+								<a href="index.html#events" class="link nav-link">
+									<span class="nav-link-text">Events</span>
+									<svg
+										class="nav-link-arrow"
+										width="12"
+										height="12"
+										viewBox="0 0 12 12"
+										fill="none"
+									>
+										<path
+											d="M0.230469 5.09969H8.95047L4.57047 0.679688H7.03047L11.7705 5.41969V6.57969L7.03047 11.3197H4.57047L8.95047 6.85969H0.230469V5.09969Z"
+											fill="currentColor"
+										></path>
+									</svg>
+								</a>
+								<a href="index.html#about" class="link nav-link">
+									<span class="nav-link-text">About</span>
+									<svg
+										class="nav-link-arrow"
+										width="12"
+										height="12"
+										viewBox="0 0 12 12"
+										fill="none"
+									>
+										<path
+											d="M0.230469 5.09969H8.95047L4.57047 0.679688H7.03047L11.7705 5.41969V6.57969L7.03047 11.3197H4.57047L8.95047 6.85969H0.230469V5.09969Z"
+											fill="currentColor"
+										></path>
+									</svg>
+								</a>
+								<a href="gallery.html" class="link nav-link">
+									<span class="nav-link-text">Gallery</span>
+									<svg
+										class="nav-link-arrow"
+										width="12"
+										height="12"
+										viewBox="0 0 12 12"
+										fill="none"
+									>
+										<path
+											d="M0.230469 5.09969H8.95047L4.57047 0.679688H7.03047L11.7705 5.41969V6.57969L7.03047 11.3197H4.57047L8.95047 6.85969H0.230469V5.09969Z"
+											fill="currentColor"
+										></path>
+									</svg>
+								</a>
+							</div>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
+
+		<div class="gallery-container">
+			<div id="app-wrapper">
+				<div class="body-container">
+					<div class="box"></div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Image Detail Modal -->
+		<div id="image-detail-modal">
+			<div class="detail-container"></div>
+		</div>
+
+		<!-- Footer -->
+		<footer class="site-footer">
+			<div class="footer-inner">
+				<div class="footer-brand">
+					<img
+						src="./public/magnovite.png"
+						alt="Magnovite"
+						class="footer-logo"
+					/>
+					<span class="footer-divider"></span>
+					<img
+						src="./public/christwhite.png"
+						alt="Christ University"
+						class="footer-logo footer-logo--christ"
+					/>
+				</div>
+				<div class="footer-columns">
+					<div class="footer-col footer-about">
+						<p>
+							Christ University, Kengeri Campus offers a blend of traditional
+							and world-class facilities, including department-specific
+							buildings, libraries, research facilities, and residences, amidst
+							the city's greenery.
+						</p>
+					</div>
+					<div class="footer-col footer-desc">
+						<p>
+							MAGNOVITE, the 15th edition of CHRIST University's flagship fest,
+							fosters creativity, collaboration, healthy competition, and
+							positive connections among participants.
+						</p>
+						<div class="footer-social">
+							<a
+								href="https://www.linkedin.com/company/christ-university-faculty-of-engineering/?originalSubdomain=in"
+								target="_blank"
+								class="social-link linkedin-link"
+								aria-label="LinkedIn"
+							>
+								<svg
+									class="social-icon"
+									width="20"
+									height="20"
+									viewBox="0 0 24 24"
+									fill="none"
+								>
+									<path
+										d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+										fill="currentColor"
+									/>
+								</svg>
+							</a>
+							<a
+								href="https://www.instagram.com/magnovite.kengeri/"
+								target="_blank"
+								class="social-link instagram-link"
+								aria-label="Instagram"
+							>
+								<svg
+									class="social-icon"
+									width="20"
+									height="20"
+									viewBox="0 0 24 24"
+									fill="none"
+								>
+									<path
+										d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+										fill="currentColor"
+									/>
+								</svg>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<script>
+			// Global variables and constants
+			window.currentImageSrc = null;
+
+			// --- ORIGINAL CLASSES AND LOGIC ---
+			const imagePaths = [
+				'./public/Gallery/1_400x400.jpg',
+				'./public/Gallery/2_400x400.jpg',
+				'./public/Gallery/3_400x400.jpg',
+				'./public/Gallery/4_400x400.jpg',
+				'./public/Gallery/5_400x400.jpg',
+				'./public/Gallery/6_400x400.jpg',
+				'./public/Gallery/7_400x400.jpg',
+				'./public/Gallery/8_400x400.jpg',
+				'./public/Gallery/9_400x400.jpg',
+				'./public/Gallery/10_400x400.jpg',
+			];
+
+			class Utilities {
+				static norm(value, min, max) {
+					return (value - min) / (max - min);
+				}
+				static lerp(norm, min, max) {
+					return (max - min) * norm + min;
+				}
+				static map(value, sourceMin, sourceMax, destMin, destMax) {
+					return this.lerp(
+						this.norm(value, sourceMin, sourceMax),
+						destMin,
+						destMax
+					);
+				}
+				static clamp(value, min, max) {
+					return Math.min(Math.max(value, min), max);
+				}
+				static distance(x0, y0, x1, y1) {
+					const dx = x1 - x0;
+					const dy = y1 - y0;
+					return Math.sqrt(dx * dx + dy * dy);
+				}
+				static randomRange(min, max) {
+					return min + Math.random() * (max - min);
+				}
+				static randomInt(min, max) {
+					return Math.floor(min + Math.random() * (max - min + 1));
+				}
+				static randomDist(min, max, iterations) {
+					let total = 0;
+					for (let i = 0; i < iterations; i++) {
+						total += this.randomRange(min, max);
+					}
+					return total / iterations;
+				}
+				static degreesToRads(degrees) {
+					return (degrees / 180) * Math.PI;
+				}
+				static radsToDegrees(radians) {
+					return (radians * 180) / Math.PI;
+				}
+				static roundToPlaces(value, places) {
+					const mult = Math.pow(10, places);
+					return Math.round(value * mult) / mult;
+				}
+				static roundNearest(value, nearest) {
+					return Math.round(value / nearest) * nearest;
+				}
+			}
+
+			class Loading {
+				constructor() {
+					this.load = document.getElementsByClassName('loading')[0];
+					this.line = document.getElementsByClassName('line')[0];
+					this.counter = document.getElementsByClassName('counter')[0];
+					this.imagePaths = imagePaths;
+					this.loadedNumber = 1;
+					this.percentage = 0;
+					this.num = 0;
+				}
+
+				initialize() {
+					return new Promise((resolve, reject) => {
+						this.loadImages(resolve, reject);
+					});
+				}
+
+				loadImages(resolve, reject) {
+					for (let i = 0; i < this.imagePaths.length; i++) {
+						const path = this.imagePaths[i];
+						const image = new Image();
+						image.src = path;
+						image.crossOrigin = 'anonymous';
+						image.addEventListener('load', () => {
+							this.percentage = this.getPercentage(this.loadedNumber++);
+						});
+					}
+					this.drawPercentage(resolve, reject);
+				}
+
+				getPercentage(num) {
+					return Math.floor((num / this.imagePaths.length) * 100);
+				}
+
+				drawPercentage(resolve, reject) {
+					if (this.num < this.percentage) {
+						this.num++;
+					}
+
+					this.line.style.width = this.num + '%';
+					this.counter.textContent = this.num + '%';
+
+					if (this.num === 100) {
+						this.cancelDrawLoopCounterNumber(resolve, reject);
+						return;
+					}
+
+					this.animationID = requestAnimationFrame(
+						this.drawPercentage.bind(this, resolve, reject)
+					);
+				}
+
+				cancelDrawLoopCounterNumber(resolve, reject) {
+					cancelAnimationFrame(this.animationID);
+					this.addClass(resolve, reject);
+				}
+
+				addClass(resolve, reject) {
+					this.delay(400).then(() => {
+						this.load.classList.add('loaded');
+						this.line.classList.add('loaded');
+						this.counter.classList.add('loaded');
+						resolve();
+					});
+				}
+
+				delay(time) {
+					return new Promise((resolve, reject) => {
+						setTimeout(() => {
+							resolve();
+						}, time);
+					});
+				}
+			}
+
+			class FullScreen {
+				constructor() {
+					this.setupEvents();
+					this.initialize();
+				}
+
+				initialize() {
+					const vh = window.innerHeight * 0.01;
+					document.documentElement.style.setProperty('--vh', `${vh}px`);
+				}
+
+				setupEvents() {
+					window.addEventListener('resize', this.onResize.bind(this), false);
+				}
+
+				onResize() {
+					this.initialize();
+				}
+			}
+
+			class DrawMainImage {
+				constructor(ctx, width, height) {
+					this.ctx = ctx;
+					this.width = width;
+					this.height = height;
+					this.initialize();
+				}
+
+				initialize() {
+					this.canvas = document.createElement('canvas');
+					this.ctx2 = this.canvas.getContext('2d');
+					this.image = null;
+					this.stopWatch = new Stopwatch();
+					this.dataArr = [];
+				}
+
+				drawImage(src) {
+					this.isLoaded = false;
+					this.image = new Image();
+					this.image.src = src;
+					this.image.crossOrigin = 'anonymous';
+
+					this.image.addEventListener('load', () => {
+						this.stopWatch.initialize();
+						let imageWidth, ratio, imageHeight;
+
+						// Original logic for sizing the image to fit the screen
+						if (this.image.width >= this.image.height) {
+							imageWidth = Math.min(this.width * 0.9, this.image.width);
+							ratio = this.image.width / this.image.height;
+							imageHeight = imageWidth / ratio;
+						} else {
+							imageHeight = Math.min(this.height * 0.9, this.image.height);
+							ratio = this.image.height / this.image.width;
+							imageWidth = imageHeight / ratio;
+
+							if (imageWidth >= this.width * 0.9) {
+								imageWidth = Math.min(this.width * 0.9, this.image.width);
+								ratio = this.image.width / this.image.height;
+								imageHeight = imageWidth / ratio;
+							}
+						}
+
+						this.canvas.width = imageWidth;
+						this.canvas.height = imageHeight;
+						this.ctx2.clearRect(0, 0, imageWidth, imageHeight);
+						this.ctx2.drawImage(this.image, 0, 0, imageWidth, imageHeight);
+						this.getImageData();
+						this.isLoaded = true;
+					});
+				}
+
+				getImageData() {
+					this.dataArr = [];
+					let preHeight = 0,
+						addHeight = 0;
+					for (let i = 0; i < this.canvas.height; i += addHeight) {
+						const obj = {};
+						addHeight = Utilities.randomInt(5, 20);
+						if (preHeight + addHeight > this.canvas.height) {
+							addHeight = Math.floor(this.canvas.height - preHeight);
+						}
+						if (addHeight === 0) return;
+						const image = this.ctx2.getImageData(
+							0,
+							preHeight,
+							this.canvas.width,
+							addHeight
+						);
+						obj.image = image;
+						obj.height = preHeight;
+						obj.width = Math.random() * this.width * 0.5 - this.width * 0.25;
+						this.dataArr.push(obj);
+						preHeight += addHeight;
+					}
+				}
+
+				addImage(t) {
+					if (!this.isLoaded) return;
+					for (let i = 0; i < this.dataArr.length; i++) {
+						this.ctx.putImageData(
+							this.dataArr[i].image,
+							this.width / 2 - this.canvas.width / 2 + this.dataArr[i].width,
+							this.height / 2 - this.canvas.height / 2 + this.dataArr[i].height
+						);
+					}
+					this.moveImage();
+				}
+
+				moveImage() {
+					this.stopWatch.calculateTime();
+					const t =
+						1.0 - Math.min(this.stopWatch.getElapsedTime() * 0.0002, 1.0);
+					this.e = this.ease(t);
+					for (let i = 0; i < this.dataArr.length; i++) {
+						this.dataArr[i].width *= this.e;
+					}
+				}
+
+				deleteImage(t) {
+					if (!this.isLoaded) return;
+					for (let i = 0; i < this.dataArr.length; i++) {
+						this.ctx.putImageData(
+							this.dataArr[i].image,
+							this.width / 2 -
+								this.canvas.width / 2 +
+								this.dataArr[i].width +
+								Math.tan(t * 0.01 + this.dataArr[i].height / Math.PI) * 100,
+							this.height / 2 - this.canvas.height / 2 + this.dataArr[i].height
+						);
+					}
+				}
+
+				ease(x) {
+					return 1 - Math.sqrt(1 - Math.pow(x, 2));
+				}
+			}
+
+			class Sketch {
+				constructor() {
+					this.setupCanvas();
+					this.setupEvents();
+					this.initialize();
+				}
+
+				setupCanvas() {
+					this.canvas = document.createElement('canvas');
+					this.ctx = this.canvas.getContext('2d');
+					this.canvas.ariaLabel = 'This is images gallery.';
+					this.canvas.role = 'img';
+					this.canvas.style.position = 'fixed';
+					this.canvas.style.top = '0';
+					this.canvas.style.left = '0';
+					this.canvas.style.width = '100%';
+					this.canvas.style.minHeight = '100vh';
+					this.canvas.style.minHeight = 'calc(var(--vh, 1vh) * 100)';
+					this.canvas.style.display = 'block';
+					this.canvas.style.background = 'var(--bg-dark)';
+					this.canvas.style.zIndex = '-1';
+					document.body.appendChild(this.canvas);
+				}
+
+				setupEvents() {
+					window.addEventListener('resize', this.onResize.bind(this), false);
+					window.addEventListener('wheel', this.onWheel.bind(this), false);
+					document.body.addEventListener(
+						'click',
+						this.onClick.bind(this),
+						false
+					);
+					document.body.addEventListener(
+						'mousemove',
+						this.onMousemove.bind(this),
+						false
+					);
+					document.body.addEventListener(
+						'touchstart',
+						this.onTouchstart.bind(this),
+						false
+					);
+					document.body.addEventListener(
+						'touchmove',
+						this.onTouchmove.bind(this),
+						false
+					);
+				}
+
+				onMousemove(e) {
+					this.touchInfos.mouse.x =
+						(e.clientX / this.width) * this.width - this.width / 2;
+					this.touchInfos.mouse.y =
+						(e.clientY / this.height) * this.height - this.height / 2;
+				}
+
+				onTouchstart(e) {
+					const t = e.targetTouches[0];
+					this.touchInfos.fing.start.x = t.pageX;
+					this.touchInfos.fing.start.y = t.pageY;
+				}
+
+				onTouchmove(e) {
+					const t = e.targetTouches[0];
+					this.touchInfos.mouse.x =
+						(t.pageX / this.width) * this.width - this.width / 2;
+					this.touchInfos.mouse.y =
+						(t.pageY / this.height) * this.height - this.height / 2;
+					this.touchInfos.fing.move.x = t.pageX;
+					this.touchInfos.fing.move.y = t.pageY;
+					this.touchInfos.fing.end.x =
+						this.touchInfos.fing.start.x - this.touchInfos.fing.move.x;
+					this.touchInfos.fing.end.y =
+						this.touchInfos.fing.start.y - this.touchInfos.fing.move.y;
+					this.touchInfos.delta.x += this.touchInfos.fing.end.x * 0.0003;
+					this.touchInfos.delta.y += this.touchInfos.fing.end.y * 0.0003;
+				}
+
+				onResize() {
+					if (this.preWidth === window.innerWidth) {
+						this.height = this.canvas.height = window.innerHeight;
+						return;
+					}
+					this.initialize();
+				}
+
+				onWheel(e) {
+					this.touchInfos.delta.x += e.deltaX * 0.0005;
+					this.touchInfos.delta.y += e.deltaY * 0.0005;
+				}
+
+				onClick(e) {
+					// If the detail modal is currently displayed, do not process canvas clicks to open it again.
+					if (this.isDisplayed) {
+						return;
+					}
+
+					const x = (this.touchInfos.mouse.x =
+						(e.clientX / this.width) * this.width - this.width / 2);
+					const y = (this.touchInfos.mouse.y =
+						(e.clientY / this.height) * this.height - this.height / 2);
+
+					for (let i = 0; i < this.shapes.length; i++) {
+						const s = this.shapes[i];
+
+						if (this.isHovered(s, x, y)) {
+							this.isDisplayed = true;
+
+							// Store the image src and show the HTML modal
+							window.currentImageSrc = s.image.src;
+							this.showDetailModal();
+
+							this.M.drawImage(s.image.src); // Start drawing the enlarged image on canvas
+							return;
+						}
+					}
+				}
+
+				showDetailModal() {
+					// Show the HTML modal overlay with the image
+					const modal = document.getElementById('image-detail-modal');
+					if (modal && window.currentImageSrc) {
+						// Create or update the image in the modal
+						let modalImage = modal.querySelector('.modal-image');
+						if (!modalImage) {
+							modalImage = document.createElement('img');
+							modalImage.className = 'modal-image';
+							modalImage.style.cssText =
+								'max-width: 90vw; max-height: 90vh; object-fit: contain; cursor: pointer; border-radius: 0; box-shadow: none;';
+							const container = modal.querySelector('.detail-container');
+							container.appendChild(modalImage);
+
+							// Add click handler to the modal image to close the modal
+							modalImage.addEventListener('click', () => {
+								if (this) {
+									this.closeDetailModal();
+								}
+							});
+						}
+						modalImage.src = window.currentImageSrc;
+						modal.style.display = 'flex';
+					}
+				}
+				closeDetailModal() {
+					const modal = document.getElementById('image-detail-modal');
+					if (modal) {
+						modal.style.display = 'none';
+					}
+
+					// Trigger the delete animation when closing the detail view
+					this.isDeleating = true;
+					setTimeout(() => {
+						this.isDeleating = false;
+						this.isDisplayed = false;
+					}, 160);
+
+					// Clear the current image source
+					window.currentImageSrc = null;
+				}
+				initialize() {
+					if (this.animationId) {
+						cancelAnimationFrame(this.animationId);
+					}
+
+					this.paths = imagePaths;
+					this.isDisplayed = false;
+					this.isDeleating = false; // Added property for explicit control
+
+					this.hasHover = window.matchMedia('(hover: hover)').matches;
+
+					this.setupSizes();
+					this.setupShapes();
+
+					this.focus = { x: 0, y: 0, s: this.size };
+					this.touchInfos = {
+						mouse: { x: 0, y: 0 },
+						delta: { x: 0, y: 0 },
+						fing: {
+							start: { x: null, y: null },
+							move: { x: null, y: null },
+							end: { x: null, y: null },
+						},
+					};
+
+					this.G = new Glitch(this.ctx, this.width, this.height, 50, 200);
+					this.M = new DrawMainImage(this.ctx, this.width, this.height);
+
+					this.render(0);
+				}
+
+				setupSizes() {
+					this.width = this.preWidth = this.canvas.width = window.innerWidth;
+					this.height = this.canvas.height = window.innerHeight;
+				}
+
+				setupShapes() {
+					const edge = Math.max(this.width, this.height);
+					this.radius = edge / 2;
+					this.numberOfShape = 16;
+					this.size = this.radius / (this.numberOfShape / 6);
+					this.shapes = [];
+
+					let index = 0;
+					for (let x = 0; x < this.numberOfShape; x++) {
+						for (let y = 0; y < this.numberOfShape; y++) {
+							const params = {
+								x: x,
+								y: y,
+								i: index++,
+								c: this.ctx,
+								s: this.size,
+								r: this.radius,
+								n: this.numberOfShape,
+								p: this.paths[
+									Math.floor(Math.random() * (this.paths.length - 1))
+								],
+							};
+							this.shapes.push(new Shape(params));
+						}
+					}
+				}
+
+				drawFocus(s, hover) {
+					const focusColor = getComputedStyle(document.documentElement)
+						.getPropertyValue('--accent-focus')
+						.trim();
+
+					if (hover === false) {
+						this.focus.s += (0 - this.focus.s) * 0.16;
+						this.focus.x += (this.touchInfos.mouse.x - this.focus.x) * 0.16;
+						this.focus.y += (this.touchInfos.mouse.y - this.focus.y) * 0.16;
+						this.ctx.save();
+						this.ctx.strokeStyle = focusColor;
+						this.ctx.lineWidth = 1;
+						this.ctx.strokeRect(
+							this.focus.x - this.focus.s / 2,
+							this.focus.y - this.focus.s / 2,
+							this.focus.s,
+							this.focus.s
+						);
+						this.ctx.restore();
+					} else {
+						this.focus.s += (this.size * s.ratio - this.focus.s) * 0.16;
+						this.focus.x += (s.x - this.focus.x) * 0.16;
+						this.focus.y += (s.y - this.focus.y) * 0.16;
+						this.ctx.save();
+						this.ctx.strokeStyle = focusColor;
+						this.ctx.lineWidth = 5 * s.ratio;
+						this.ctx.strokeRect(
+							this.focus.x - this.focus.s / 2,
+							this.focus.y - this.focus.s / 2,
+							this.focus.s,
+							this.focus.s
+						);
+						this.ctx.restore();
+					}
+				}
+
+				isHovered(shape, x, y) {
+					if (
+						shape.displayed === true &&
+						x > shape.x - (this.size / 2) * shape.ratio &&
+						x < shape.x + (this.size / 2) * shape.ratio &&
+						y > shape.y - (this.size / 2) * shape.ratio &&
+						y < shape.y + (this.size / 2) * shape.ratio
+					) {
+						return true;
+					}
+				}
+
+				resetParams() {
+					this.hover = false;
+					document.body.style.cursor = 'initial';
+				}
+
+				render(t) {
+					this.resetParams();
+					this.ctx.clearRect(0, 0, this.width, this.height);
+					this.ctx.save();
+					this.ctx.translate(this.width / 2, this.height / 2);
+
+					let hoveredIndex;
+					for (let i = 0; i < this.shapes.length; i++) {
+						const s = this.shapes[i];
+						this.shapes[i].draw(this.touchInfos);
+						if (
+							this.isHovered(
+								s,
+								this.touchInfos.mouse.x,
+								this.touchInfos.mouse.y
+							)
+						) {
+							document.body.style.cursor = 'zoom-in';
+							this.hover = true;
+							hoveredIndex = i;
+						}
+					}
+
+					this.drawFocus(this.shapes[hoveredIndex], this.hover);
+
+					if (Math.random() < 0.01) {
+						this.G.draw(t);
+					}
+
+					// The background image view is now drawn on the canvas behind the HTML modal.
+					if (this.isDisplayed && this.isDeleating !== true) {
+						this.ctx.globalAlpha = 0.8;
+						this.ctx.fillStyle = getComputedStyle(document.documentElement)
+							.getPropertyValue('--bg-dark')
+							.trim();
+						this.ctx.fillRect(
+							-this.width / 2,
+							-this.height / 2,
+							this.width,
+							this.height
+						);
+						this.M.addImage(t);
+					}
+
+					if (this.isDeleating) {
+						this.M.deleteImage(t);
+					}
+
+					this.ctx.restore();
+					this.animationId = requestAnimationFrame(this.render.bind(this));
+				}
+			}
+
+			class Shape {
+				constructor(params) {
+					this.ctx = params.c;
+					this.xIndex = params.x;
+					this.yIndex = params.y;
+					this.index = params.i;
+					this.radius = params.r;
+					this.numberOfShape = params.n;
+					this.size = params.s;
+					this.image = new Image();
+					this.image.crossOrigin = 'anonymous';
+					this.image.src = params.p;
+					this.ratio = 0;
+					this.displayed = true;
+					this.initialize();
+				}
+
+				initialize() {
+					this.xRadian = ((Math.PI * 2) / this.numberOfShape) * this.xIndex;
+					this.yRadian = ((Math.PI * 2) / this.numberOfShape) * this.yIndex;
+				}
+
+				updateParams(infos) {
+					this.x = Math.sin(this.xRadian + infos.delta.x) * this.radius;
+					this.y = Math.cos(this.yRadian + infos.delta.y) * this.radius;
+					this.ratio = this.getNormalizedDist(infos);
+				}
+
+				getNormalizedDist(infos) {
+					let tmp;
+					tmp = Math.sqrt(this.x * this.x + this.y * this.y) / this.radius;
+					tmp = this.ease(tmp);
+					tmp = 1 - Math.min(tmp, 1);
+					return tmp;
+				}
+
+				ease(t) {
+					return t * t * t;
+				}
+
+				draw(infos) {
+					this.updateParams(infos);
+					if (
+						Math.sin(this.yRadian + infos.delta.y) > 0 ||
+						Math.cos(this.xRadian + infos.delta.x) > 0
+					) {
+						this.displayed = false;
+						return;
+					}
+					this.displayed = true;
+					this.ctx.save();
+					this.ctx.translate(this.x, this.y);
+					this.ctx.scale(this.ratio, this.ratio);
+					this.ctx.translate(-this.x, -this.y);
+					this.ctx.globalAlpha = this.ratio;
+					this.ctx.drawImage(
+						this.image,
+						this.image.width / 2 - this.size / 2,
+						this.image.height / 2 - this.size / 2,
+						this.size,
+						this.size,
+						this.x - this.size / 2,
+						this.y - this.size / 2,
+						this.size,
+						this.size
+					);
+					this.ctx.restore();
+				}
+			}
+
+			class Glitch {
+				constructor(ctx, width, height, min, max) {
+					this.ctx = ctx;
+					this.width = width;
+					this.height = height;
+					this.min = min;
+					this.max = max;
+					this.dataArr = [];
+				}
+
+				getImageData() {
+					let preHeight = 0,
+						addHeight = 0;
+					for (let i = 0; i < this.height; i += addHeight) {
+						const obj = {};
+						addHeight = Utilities.randomInt(this.min, this.max);
+						if (preHeight + addHeight > this.height) {
+							addHeight = Math.floor(this.height - preHeight);
+						}
+						if (addHeight === 0) {
+							return;
+						}
+						const image = this.ctx.getImageData(
+							0,
+							preHeight,
+							this.width,
+							preHeight + addHeight
+						);
+						obj.image = image;
+						obj.height = preHeight;
+						this.dataArr.push(obj);
+						preHeight += addHeight;
+					}
+				}
+
+				addImage(t) {
+					for (let i = 0; i < this.dataArr.length; i++) {
+						if (Math.random() > 0.01) {
+							this.ctx.putImageData(
+								this.dataArr[i].image,
+								Math.tan(this.dataArr[i].height * 0.1 + t) * 10 * Math.random(),
+								this.dataArr[i].height
+							);
+						} else {
+							this.ctx.putImageData(
+								this.dataArr[Math.floor(this.dataArr.length * Math.random())]
+									.image,
+								this.width * Math.random() - this.width / 2,
+								this.dataArr[i].height
+							);
+						}
+					}
+				}
+
+				draw(t) {
+					this.dataArr = [];
+					this.getImageData();
+					this.addImage(t);
+				}
+			}
+
+			class Stopwatch {
+				constructor() {
+					this.initialize();
+				}
+				initialize() {
+					const time = Date.now();
+					this.startTime = time;
+					this.lastTime = time;
+				}
+				calculateTime() {
+					const time = Date.now();
+					this.elapsedTime = time - this.startTime;
+					this.lastTime = time;
+				}
+				getElapsedTime() {
+					return this.elapsedTime;
+				}
+			}
+
+			window.addEventListener('load', () => {
+				const F = new FullScreen();
+				let S; // Reference to the Sketch instance
+
+				// Start gallery immediately without loading screen
+				S = new Sketch();
+
+				// ESC key handling
+				document.addEventListener('keydown', (e) => {
+					if (e.key === 'Escape' && S && S.isDisplayed) {
+						S.closeDetailModal();
+					}
+				});
+
+				// Modal overlay click-to-close (click outside modal content)
+				const modal = document.getElementById('image-detail-modal');
+				if (modal) {
+					modal.addEventListener('click', (e) => {
+						if (e.target === modal) {
+							// Only close if clicking the overlay, not the content
+							if (S) {
+								S.closeDetailModal();
+							}
+						}
+					});
+				}
+
+				// Prevent modal content clicks from closing the modal
+				const modalContent = document.querySelector('.detail-container');
+				if (modalContent) {
+					modalContent.addEventListener('click', (e) => {
+						e.stopPropagation(); // Prevent event bubbling to overlay
+					});
+				}
+			});
+		</script>
+	</body>
+</html>

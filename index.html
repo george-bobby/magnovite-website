@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Home - Magnovite'25</title>
+		<link
+			rel="icon"
+			type="image/png"
+			href="./public/magnovite.png"
+			sizes="32x32 64x64 128x128 192x192"
+		/>
+		<link
+			rel="apple-touch-icon"
+			href="./public/magnovite.png"
+			sizes="180x180"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./src/style.css" />
+		<style>
+			/* CTA Section Styles */
+			.cta-section {
+				text-align: center;
+				padding: 6rem 2rem;
+				background: linear-gradient(
+					135deg,
+					rgba(255, 0, 255, 0.15),
+					rgba(128, 0, 255, 0.15),
+					rgba(0, 255, 255, 0.1)
+				);
+				margin: 6rem 0 4rem;
+				border-radius: 30px;
+				position: relative;
+				overflow: hidden;
+				border: 1px solid rgba(255, 255, 255, 0.1);
+			}
+
+			.cta-section::before {
+				content: '';
+				position: absolute;
+				top: -50%;
+				left: -50%;
+				width: 200%;
+				height: 200%;
+				background: radial-gradient(
+					circle,
+					rgba(255, 0, 255, 0.1) 0%,
+					transparent 70%
+				);
+				animation: rotate 20s linear infinite;
+			}
+
+			@keyframes rotate {
+				from {
+					transform: rotate(0deg);
+				}
+				to {
+					transform: rotate(360deg);
+				}
+			}
+
+			.cta-title {
+				font-size: clamp(2.5rem, 6vw, 4rem);
+				font-weight: 800;
+				color: #ffffff;
+				margin-bottom: 1.5rem;
+				position: relative;
+				z-index: 2;
+				background: linear-gradient(45deg, #ffffff, #ff00ff, #8000ff);
+				background-size: 200% 200%;
+				-webkit-background-clip: text;
+				background-clip: text;
+				-webkit-text-fill-color: transparent;
+				animation: gradient-shift 3s ease infinite;
+			}
+
+			@keyframes gradient-shift {
+				0%,
+				100% {
+					background-position: 0% 50%;
+				}
+				50% {
+					background-position: 100% 50%;
+				}
+			}
+
+			.cta-text {
+				font-size: 1.3rem;
+				color: rgba(255, 255, 255, 0.9);
+				margin-bottom: 3rem;
+				max-width: 700px;
+				margin-left: auto;
+				margin-right: auto;
+				position: relative;
+				z-index: 2;
+				line-height: 1.6;
+			}
+
+			.cta-buttons {
+				display: flex;
+				gap: 1.5rem;
+				justify-content: center;
+				flex-wrap: wrap;
+			}
+
+			.cta-button {
+				background: linear-gradient(45deg, #ff00ff, #8000ff);
+				border: none;
+				color: white;
+				padding: 1.2rem 3rem;
+				font-size: 1.1rem;
+				font-weight: 700;
+				border-radius: 50px;
+				cursor: pointer;
+				transition: all 0.3s ease;
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+				position: relative;
+				z-index: 2;
+				overflow: hidden;
+				min-width: 200px;
+			}
+
+			.cta-button.secondary {
+				background: transparent;
+				border: 2px solid rgba(255, 0, 255, 0.5);
+				color: #ffffff;
+			}
+
+			.cta-button.secondary:hover {
+				background: rgba(255, 0, 255, 0.1);
+				border-color: #ff00ff;
+			}
+
+			.cta-button::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(
+					90deg,
+					transparent,
+					rgba(255, 255, 255, 0.2),
+					transparent
+				);
+				transition: left 0.6s ease;
+			}
+
+			.cta-button:hover::before {
+				left: 100%;
+			}
+
+			.cta-button:hover {
+				transform: translateY(-5px) scale(1.05);
+				box-shadow: 0 15px 40px rgba(255, 0, 255, 0.4);
+			}
+
+			/* Scroll animations */
+			.scroll-reveal {
+				opacity: 0;
+				transform: translateY(50px);
+				transition: all 0.8s ease;
+			}
+
+			.scroll-reveal.revealed {
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			/* Responsive Design */
+			@media (max-width: 768px) {
+				.cta-section {
+					padding: 4rem 1rem;
+					margin: 4rem 0 2rem;
+				}
+
+				.cta-buttons {
+					flex-direction: column;
+					align-items: center;
+				}
+
+				.cta-button {
+					min-width: 250px;
+				}
+			}
+		</style>
+	</head>
+	<body id="home">
+		<!-- Navigation -->
+		<header class="header">
+			<div class="nav-container">
+				<nav class="nav-row">
+					<div class="nav-inner">
+						<a
+							href="https://www.christuniversity.in/"
+							target="_blank"
+							class="nav-logo-row"
+						>
+							<img
+								src="./public/christwhite.png"
+								alt="Christ University"
+								class="nav-logo-img"
+							/>
+						</a>
+						<div class="nav-menu">
+							<div class="nav-menu__links">
+								<a href="/index.html" class="link nav-link">
+									<span class="nav-link-text">Home</span>
+									<svg
+										class="nav-link-arrow"
+										width="12"
+										height="12"
+										viewBox="0 0 12 12"
+										fill="none"
+									>
+										<path
+											d="M0.230469 5.09969H8.95047L4.57047 0.679688H7.03047L11.7705 5.41969V6.57969L7.03047 11.3197H4.57047L8.95047 6.85969H0.230469V5.09969Z"
+											fill="currentColor"
+										></path>
+									</svg>
+								</a>
+								<a href="/events.html" class="link nav-link">
+									<span class="nav-link-text">Events</span>
+									<svg
+										class="nav-link-arrow"
+										width="12"
+										height="12"
+										viewBox="0 0 12 12"
+										fill="none"
+									>
+										<path
+											d="M0.230469 5.09969H8.95047L4.57047 0.679688H7.03047L11.7705 5.41969V6.57969L7.03047 11.3197H4.57047L8.95047 6.85969H0.230469V5.09969Z"
+											fill="currentColor"
+										></path>
+									</svg>
+								</a>
+								<a href="/about.html" class="link nav-link">
+									<span class="nav-link-text">About</span>
+									<svg
+										class="nav-link-arrow"
+										width="12"
+										height="12"
+										viewBox="0 0 12 12"
+										fill="none"
+									>
+										<path
+											d="M0.230469 5.09969H8.95047L4.57047 0.679688H7.03047L11.7705 5.41969V6.57969L7.03047 11.3197H4.57047L8.95047 6.85969H0.230469V5.09969Z"
+											fill="currentColor"
+										></path>
+									</svg>
+								</a>
+								<a href="/gallery.html" class="link nav-link">
+									<span class="nav-link-text">Gallery</span>
+									<svg
+										class="nav-link-arrow"
+										width="12"
+										height="12"
+										viewBox="0 0 12 12"
+										fill="none"
+									>
+										<path
+											d="M0.230469 5.09969H8.95047L4.57047 0.679688H7.03047L11.7705 5.41969V6.57969L7.03047 11.3197H4.57047L8.95047 6.85969H0.230469V5.09969Z"
+											fill="currentColor"
+										></path>
+									</svg>
+								</a>
+							</div>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
+
+		<div class="container">
+			<div class="overlay"></div>
+			<div class="hero-1-container">
+				<div class="hero-main-container">
+					<h1 class="hero-main-logo" aria-label="Are you excited?">
+						<img src="./public/excited.png" alt="Are you excited?" />
+					</h1>
+					<video class="hero-main-image" autoplay muted loop playsinline>
+						<source src="./public/initialbg.mp4" type="video/mp4" />
+					</video>
+				</div>
+				<div class="hero-text-logo-container">
+					<div class="hero-text-logo"></div>
+					<div>
+						<h3 class="hero-text">
+							MAGNOVITE<br />
+							2025
+						</h3>
+					</div>
+				</div>
+			</div>
+			<div class="hero-2-container">
+				<h3>Welcome to Magnovite'25</h3>
+				<p>
+					MAGNOVITE is the annual flagship fest organised by CHRIST (Deemed To
+					be University), Kengeri Campus. It is an enigmatic nexus of creativity
+					and collaboration, bringing healthy competition and positive
+					connections between participants. It returns this year with its 15th
+					edition, bringing back its unfading charm.
+				</p>
+				<button
+					class="promo-cta"
+					type="button"
+					aria-label="See our promo video"
+					aria-haspopup="dialog"
+					aria-controls="promoModal"
+				>
+					<span class="promo-cta__icon" aria-hidden="true">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+							<path d="M8 5v14l11-7L8 5z" fill="currentColor" />
+						</svg>
+					</span>
+				</button>
+			</div>
+
+			<!-- Call to Action Section -->
+			<section class="cta-section scroll-reveal">
+				<h2 class="cta-title">Join the Revolution</h2>
+				<p class="cta-text">
+					Be part of something extraordinary. MAGNOVITE'25 is more than an
+					event—it's a movement that shapes the future of technology and
+					innovation.
+				</p>
+				<div class="cta-buttons">
+					<button
+						class="cta-button secondary"
+						onclick="window.location.href='./events.html'"
+					>
+						Explore Events
+					</button>
+					<button
+						class="cta-button primary"
+						onclick="window.location.href='./about.html'"
+					>
+						Learn More
+					</button>
+				</div>
+			</section>
+
+			<footer class="site-footer">
+				<div class="footer-inner">
+					<div class="footer-brand">
+						<img
+							src="./public/magnovite.png"
+							alt="Magnovite"
+							class="footer-logo"
+						/>
+						<span class="footer-divider"></span>
+						<img
+							src="./public/christwhite.png"
+							alt="Christ University"
+							class="footer-logo footer-logo--christ"
+						/>
+					</div>
+					<div class="footer-columns">
+						<div class="footer-col footer-about">
+							<p>
+								Christ University, Kengeri Campus offers a blend of traditional
+								and world-class facilities, including department-specific
+								buildings, libraries, research facilities, and residences,
+								amidst the city's greenery.
+							</p>
+						</div>
+						<div class="footer-col footer-desc">
+							<p>
+								MAGNOVITE, the 15th edition of CHRIST University's flagship
+								fest, fosters creativity, collaboration, healthy competition,
+								and positive connections among participants.
+							</p>
+							<div class="footer-social">
+								<a
+									href="https://www.linkedin.com/company/christ-university-faculty-of-engineering/?originalSubdomain=in"
+									target="_blank"
+									class="social-link linkedin-link"
+									aria-label="LinkedIn"
+								>
+									<svg
+										class="social-icon"
+										width="20"
+										height="20"
+										viewBox="0 0 24 24"
+										fill="none"
+									>
+										<path
+											d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+											fill="currentColor"
+										/>
+									</svg>
+								</a>
+								<a
+									href="https://www.instagram.com/magnovite.kengeri/"
+									target="_blank"
+									class="social-link instagram-link"
+									aria-label="Instagram"
+								>
+									<svg
+										class="social-icon"
+										width="20"
+										height="20"
+										viewBox="0 0 24 24"
+										fill="none"
+									>
+										<path
+											d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+											fill="currentColor"
+										/>
+									</svg>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<div
+				class="promo-modal"
+				id="promoModal"
+				aria-hidden="true"
+				role="dialog"
+				aria-label="Magnovite promo video"
+			>
+				<div class="promo-modal__backdrop" data-close="promo"></div>
+				<div class="promo-modal__dialog" role="document">
+					<button
+						class="promo-modal__close"
+						type="button"
+						aria-label="Close video"
+						data-close="promo"
+					>
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+							<path
+								d="M18 6L6 18M6 6l12 12"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+							/>
+						</svg>
+					</button>
+					<div class="promo-modal__video-wrap">
+						<video
+							id="promoVideo"
+							class="promo-modal__video"
+							preload="metadata"
+							playsinline
+							controls
+						>
+							<source src="./public/promo.mp4" type="video/mp4" />
+							Your browser does not support the video tag.
+						</video>
+					</div>
+				</div>
+			</div>
+			<!-- Scroll Indicator -->
+			<div class="scroll-indicator">
+				<svg
+					width="34"
+					height="14"
+					viewBox="0 0 34 14"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+					aria-hidden="true"
+					class="_1smfa210"
+					focusable="false"
+				>
+					<path
+						fill-rule="evenodd"
+						clip-rule="evenodd"
+						d="M33.5609 1.54346C34.0381 2.5875 33.6881 3.87821 32.7791 4.42633L17.0387 13.9181L1.48663 4.42115C0.580153 3.86761 0.235986 2.57483 0.717909 1.53365C1.19983 0.492464 2.32535 0.097152 3.23182 0.650692L17.0497 9.08858L31.051 0.64551C31.96 0.0973872 33.0837 0.499411 33.5609 1.54346Z"
+						fill="currentColor"
+					></path>
+				</svg>
+			</div>
+		</div>
+	</body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+	<script defer src="./src/script.js"></script>
+	<script>
+		// CTA Section JavaScript
+		document.addEventListener('DOMContentLoaded', function () {
+			// Scroll reveal animation for CTA section
+			const ctaSection = document.querySelector('.cta-section');
+
+			if (ctaSection) {
+				const observer = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((entry) => {
+							if (entry.isIntersecting) {
+								entry.target.classList.add('revealed');
+							}
+						});
+					},
+					{
+						threshold: 0.1,
+						rootMargin: '0px 0px -50px 0px',
+					}
+				);
+
+				observer.observe(ctaSection);
+			}
+
+			// Enhanced button interactions
+			document.querySelectorAll('.cta-button').forEach((button) => {
+				// Ripple effect on click
+				button.addEventListener('click', function (e) {
+					const rect = this.getBoundingClientRect();
+					const size = Math.max(rect.width, rect.height);
+					const x = e.clientX - rect.left - size / 2;
+					const y = e.clientY - rect.top - size / 2;
+
+					const ripple = document.createElement('span');
+					ripple.style.cssText = `
+						position: absolute;
+						width: ${size}px;
+						height: ${size}px;
+						left: ${x}px;
+						top: ${y}px;
+						background: rgba(255, 255, 255, 0.3);
+						border-radius: 50%;
+						pointer-events: none;
+						transform: scale(0);
+						animation: ripple-animation 0.6s ease-out;
+					`;
+
+					this.appendChild(ripple);
+
+					setTimeout(() => {
+						ripple.remove();
+					}, 600);
+				});
+
+				// Hover glow effect
+				button.addEventListener('mouseenter', function () {
+					this.style.boxShadow = '0 0 30px rgba(255, 0, 255, 0.5)';
+				});
+
+				button.addEventListener('mouseleave', function () {
+					this.style.boxShadow = '';
+				});
+			});
+
+			// Add ripple animation keyframes if not already present
+			if (!document.querySelector('style[data-cta-animations]')) {
+				const style = document.createElement('style');
+				style.setAttribute('data-cta-animations', 'true');
+				style.textContent = `
+					@keyframes ripple-animation {
+						to {
+							transform: scale(2);
+							opacity: 0;
+						}
+					}
+				`;
+				document.head.appendChild(style);
+			}
+		});
+	</script>
+</html>

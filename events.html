@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=de      .events-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 3rem auto;
+        padding: 0 2rem;
+        width: 100%;
+        box-sizing: border-box;
+      }th, initial-scale=1.0"
+		/>
+		<title>Events - Magnovite'25</title>
+		<link
+			rel="icon"
+			type="image/png"
+			href="./public/magnovite.png"
+			sizes="32x32 64x64 128x128 192x192"
+		/>
+		<link
+			rel="apple-touch-icon"
+			href="./public/magnovite.png"
+			sizes="180x180"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./src/style.css" />
+		<style>
+			/* Events page specific styles */
+			* {
+				box-sizing: border-box;
+				max-width: 100%;
+			}
+
+			html {
+				overflow-x: hidden !important;
+				width: 100%;
+				max-width: 100vw;
+			}
+
+			body#events {
+				background: #000000;
+				color: #ffffff;
+				min-height: 100vh;
+				overflow-y: auto !important;
+				overflow-x: hidden !important;
+				width: 100% !important;
+				max-width: 100vw !important;
+				margin: 0;
+				padding: 0;
+			}
+
+			body#events .container {
+				background: #000000;
+				min-height: 100vh;
+				position: static;
+				width: 100%;
+				max-width: 100vw;
+				overflow-x: hidden;
+				padding: 0;
+				margin: 0;
+			}
+
+			.events-hero {
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+				padding: 2rem;
+				background: radial-gradient(
+					circle at 50% 50%,
+					rgba(157, 47, 106, 0.3) 0%,
+					rgba(32, 31, 66, 0.5) 50%,
+					rgba(0, 0, 0, 0.8) 100%
+				);
+			}
+
+			.events-title {
+				font-size: clamp(3rem, 8vw, 8rem);
+				font-weight: 800;
+				color: #ffb0c4;
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+				margin-bottom: 2rem;
+				text-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+				line-height: 0.9;
+			}
+
+			.events-subtitle {
+				font-size: clamp(1.2rem, 3vw, 2rem);
+				color: rgba(255, 255, 255, 0.8);
+				margin-bottom: 3rem;
+				max-width: 800px;
+				line-height: 1.4;
+			}
+
+			/* Search functionality */
+			.search-container {
+				max-width: 600px;
+				margin: 2rem auto;
+				padding: 120px 2rem 0 2rem;
+				width: 100%;
+				box-sizing: border-box;
+			}
+
+			.search-input {
+				width: 100%;
+				padding: 1rem 1.5rem;
+				background: rgba(32, 31, 66, 0.3);
+				border: 2px solid rgba(157, 47, 106, 0.3);
+				border-radius: 50px;
+				color: #ffffff;
+				font-size: 1rem;
+				transition: all 0.3s ease;
+			}
+
+			.search-input::placeholder {
+				color: rgba(255, 255, 255, 0.5);
+			}
+
+			.search-input:focus {
+				outline: none;
+				background: rgba(32, 31, 66, 0.5);
+				border-color: rgba(157, 47, 106, 0.6);
+			}
+
+			.filter-tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+				justify-content: center;
+				margin: 1.5rem 0;
+			}
+
+			.filter-tag {
+				padding: 0.5rem 1rem;
+				background: rgba(32, 31, 66, 0.3);
+				border: 1px solid rgba(157, 47, 106, 0.3);
+				border-radius: 20px;
+				color: rgba(255, 255, 255, 0.7);
+				cursor: pointer;
+				transition: all 0.3s ease;
+				font-size: 0.85rem;
+			}
+
+			.filter-tag:hover,
+			.filter-tag.active {
+				background: rgba(157, 47, 106, 0.4);
+				border-color: rgba(157, 47, 106, 0.6);
+				color: #ffb0c4;
+			}
+
+			.events-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 2rem;
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 2rem;
+			}
+
+			.event-card {
+				background: rgba(32, 31, 66, 0.2);
+				border: 1px solid rgba(157, 47, 106, 0.2);
+				border-radius: 16px;
+				padding: 2rem;
+				backdrop-filter: blur(10px);
+				transition: all 0.3s ease;
+				text-align: left;
+			}
+
+			.event-card:hover {
+				background: rgba(32, 31, 66, 0.4);
+				border-color: rgba(157, 47, 106, 0.5);
+				transform: translateY(-4px);
+				box-shadow: 0 12px 40px rgba(157, 47, 106, 0.2);
+			}
+
+			.event-image {
+				width: 100%;
+				height: 200px;
+				object-fit: cover;
+				border-radius: 12px;
+				margin-bottom: 1rem;
+			}
+
+			.event-category {
+				display: inline-block;
+				background: rgba(255, 176, 196, 0.2);
+				color: #ffb0c4;
+				padding: 0.5rem 1rem;
+				border-radius: 20px;
+				font-size: 0.85rem;
+				font-weight: 600;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				margin-bottom: 1rem;
+			}
+
+			.event-title {
+				font-size: 1.5rem;
+				font-weight: 700;
+				color: #ffffff;
+				margin-bottom: 1rem;
+				line-height: 1.2;
+			}
+
+			.event-description {
+				color: rgba(255, 255, 255, 0.7);
+				line-height: 1.6;
+				margin-bottom: 1.5rem;
+			}
+
+			.event-details {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 1rem;
+				font-size: 0.9rem;
+				color: rgba(255, 255, 255, 0.6);
+			}
+
+			.register-btn {
+				background: linear-gradient(135deg, #9e3fff 0%, #ff00ff 100%);
+				color: #ffffff;
+				font-weight: 700;
+				padding: 12px 24px;
+				border: none;
+				border-radius: 25px;
+				cursor: pointer;
+				transition: all 0.3s ease;
+				text-decoration: none;
+				display: inline-block;
+				margin-top: 1rem;
+				box-shadow: 0 4px 15px rgba(158, 63, 255, 0.3);
+			}
+
+			.register-btn:hover {
+				background: linear-gradient(135deg, #ff00ff 0%, #9e3fff 100%);
+				transform: translateY(-2px);
+				box-shadow: 0 6px 20px rgba(158, 63, 255, 0.4);
+			}
+
+			@media (max-width: 768px) {
+				.events-grid {
+					grid-template-columns: 1fr;
+					padding: 1rem;
+				}
+
+				.event-card {
+					padding: 1.5rem;
+				}
+
+				.search-container {
+					padding: 0 1rem;
+				}
+			}
+		</style>
+	</head>
+	<body id="events">
+		<!-- Navigation -->
+		<header class="header">
+			<div class="nav-container">
+				<nav class="nav-row">
+					<div class="nav-inner">
+						<a
+							href="https://www.christuniversity.in/"
+							target="_blank"
+							class="nav-logo-row"
+						>
+							<img
+								src="./public/christwhite.png"
+								alt="Christ University"
+								class="nav-logo-img"
+							/>
+						</a>
+						<div class="nav-menu">
+							<div class="nav-menu__links">
+								<a href="index.html" class="link nav-link">
+									<span class="nav-link-text">Home</span>
+									<svg
+										class="nav-link-arrow"
+										width="12"
+										height="12"
+										viewBox="0 0 12 12"
+										fill="none"
+									>
+										<path
+											d="M0.230469 5.09969H8.95047L4.57047 0.679688H7.03047L11.7705 5.41969V6.57969L7.03047 11.3197H4.57047L8.95047 6.85969H0.230469V5.09969Z"
+											fill="currentColor"
+										></path>
+									</svg>
+								</a>
+								<a href="events.html" class="link nav-link">
+									<span class="nav-link-text">Events</span>
+									<svg
+										class="nav-link-arrow"
+										width="12"
+										height="12"
+										viewBox="0 0 12 12"
+										fill="none"
+									>
+										<path
+											d="M0.230469 5.09969H8.95047L4.57047 0.679688H7.03047L11.7705 5.41969V6.57969L7.03047 11.3197H4.57047L8.95047 6.85969H0.230469V5.09969Z"
+											fill="currentColor"
+										></path>
+									</svg>
+								</a>
+								<a href="about.html" class="link nav-link">
+									<span class="nav-link-text">About</span>
+									<svg
+										class="nav-link-arrow"
+										width="12"
+										height="12"
+										viewBox="0 0 12 12"
+										fill="none"
+									>
+										<path
+											d="M0.230469 5.09969H8.95047L4.57047 0.679688H7.03047L11.7705 5.41969V6.57969L7.03047 11.3197H4.57047L8.95047 6.85969H0.230469V5.09969Z"
+											fill="currentColor"
+										></path>
+									</svg>
+								</a>
+								<a href="gallery.html" class="link nav-link">
+									<span class="nav-link-text">Gallery</span>
+									<svg
+										class="nav-link-arrow"
+										width="12"
+										height="12"
+										viewBox="0 0 12 12"
+										fill="none"
+									>
+										<path
+											d="M0.230469 5.09969H8.95047L4.57047 0.679688H7.03047L11.7705 5.41969V6.57969L7.03047 11.3197H4.57047L8.95047 6.85969H0.230469V5.09969Z"
+											fill="currentColor"
+										></path>
+									</svg>
+								</a>
+							</div>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
+
+		<div class="container">
+			<!-- Search and Filter Section -->
+			<div class="search-container">
+				<input
+					type="text"
+					class="search-input"
+					placeholder="Search events..."
+					id="searchInput"
+				/>
+				<div class="filter-tags" id="filterTags">
+					<div class="filter-tag active" data-tag="all">All</div>
+				</div>
+			</div>
+
+			<!-- Events Grid -->
+			<div class="events-grid" id="eventsGrid">
+				<!-- Fallback content while JavaScript loads -->
+				<div class="event-card">
+					<div class="event-category">Loading</div>
+					<h3 class="event-title">Loading Events...</h3>
+					<p class="event-description">Please wait while we load the events.</p>
+				</div>
+			</div>
+
+			<!-- Footer -->
+			<footer class="site-footer">
+				<div class="footer-inner">
+					<div class="footer-brand">
+						<img
+							src="./public/magnovite.png"
+							alt="Magnovite"
+							class="footer-logo"
+						/>
+						<span class="footer-divider"></span>
+						<img
+							src="./public/christwhite.png"
+							alt="Christ University"
+							class="footer-logo footer-logo--christ"
+						/>
+					</div>
+					<div class="footer-columns">
+						<div class="footer-col footer-about">
+							<p>
+								Christ University, Kengeri Campus offers a blend of traditional
+								and world-class facilities, including department-specific
+								buildings, libraries, research facilities, and residences,
+								amidst the city's greenery.
+							</p>
+						</div>
+						<div class="footer-col footer-desc">
+							<p>
+								MAGNOVITE, the 15th edition of CHRIST University's flagship
+								fest, fosters creativity, collaboration, healthy competition,
+								and positive connections among participants.
+							</p>
+							<div class="footer-social">
+								<a
+									href="https://www.linkedin.com/company/christ-university-faculty-of-engineering/?originalSubdomain=in"
+									target="_blank"
+									class="social-link linkedin-link"
+									aria-label="LinkedIn"
+								>
+									<svg
+										class="social-icon"
+										width="20"
+										height="20"
+										viewBox="0 0 24 24"
+										fill="none"
+									>
+										<path
+											d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+											fill="currentColor"
+										/>
+									</svg>
+								</a>
+								<a
+									href="https://www.instagram.com/magnovite.kengeri/"
+									target="_blank"
+									class="social-link instagram-link"
+									aria-label="Instagram"
+								>
+									<svg
+										class="social-icon"
+										width="20"
+										height="20"
+										viewBox="0 0 24 24"
+										fill="none"
+									>
+										<path
+											d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+											fill="currentColor"
+										/>
+									</svg>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</body>
+	<script>
+		// Events data from magnovite-website-main
+		const events = [
+			// Management Events
+			{
+				title: 'BEST MANAGEMENT TEAM',
+				desc: 'Compete in corporate strategy and team dynamics for top management honors.',
+				tags: ['management', 'strategy'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLScJzDO0MyrJQVtvmCkiVpC_OfH1da4TCWQiCck2Z1UYyqfYGQ/viewform',
+				img: './public/eventcards/bestmanagement.jpg',
+			},
+			{
+				title: 'CORPORATE SOCIAL RESPONSIBILITY',
+				desc: 'Explore the role of companies in making a positive societal impact.',
+				tags: ['management', 'social impact'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLScJzDO0MyrJQVtvmCkiVpC_OfH1da4TCWQiCck2Z1UYyqfYGQ/viewform',
+				img: './public/eventcards/corporatesocial.jpg',
+			},
+			{
+				title: 'BEST MANAGER',
+				desc: 'Showcase leadership skills through challenges in a competitive environment.',
+				tags: ['management', 'leadership'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLScJzDO0MyrJQVtvmCkiVpC_OfH1da4TCWQiCck2Z1UYyqfYGQ/viewform',
+				img: './public/eventcards/bestmanager.jpg',
+			},
+			{
+				title: 'FINANCE',
+				desc: 'Navigate complex financial scenarios in a competitive team-based event.',
+				tags: ['management', 'finance'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLScJzDO0MyrJQVtvmCkiVpC_OfH1da4TCWQiCck2Z1UYyqfYGQ/viewform',
+				img: './public/eventcards/finance.jpg',
+			},
+			{
+				title: 'HUMAN RESOURCES',
+				desc: 'Test HR knowledge and skills in recruitment, management, and organizational behavior.',
+				tags: ['management', 'hr'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLScJzDO0MyrJQVtvmCkiVpC_OfH1da4TCWQiCck2Z1UYyqfYGQ/viewform',
+				img: './public/eventcards/hr.jpg',
+			},
+			{
+				title: 'BUSINESS PLAN',
+				desc: 'Develop and present comprehensive business plans for innovative ventures.',
+				tags: ['management', 'entrepreneurship'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLScJzDO0MyrJQVtvmCkiVpC_OfH1da4TCWQiCck2Z1UYyqfYGQ/viewform',
+				img: './public/eventcards/businessplan.jpg',
+			},
+			{
+				title: 'MARKETING',
+				desc: 'Create compelling marketing strategies and campaigns for various products and services.',
+				tags: ['management', 'marketing'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLScJzDO0MyrJQVtvmCkiVpC_OfH1da4TCWQiCck2Z1UYyqfYGQ/viewform',
+				img: './public/eventcards/marketing.jpg',
+			},
+			{
+				title: 'BUSINESS QUIZ',
+				desc: 'Test your business acumen and knowledge across various domains.',
+				tags: ['management', 'quiz'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLScJzDO0MyrJQVtvmCkiVpC_OfH1da4TCWQiCck2Z1UYyqfYGQ/viewform',
+				img: './public/eventcards/businessquiz.jpg',
+			},
+			{
+				title: 'PUBLIC RELATIONS',
+				desc: 'Manage public image and communication strategies in crisis scenarios.',
+				tags: ['management', 'communication'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLScJzDO0MyrJQVtvmCkiVpC_OfH1da4TCWQiCck2Z1UYyqfYGQ/viewform',
+				img: './public/eventcards/pr.jpg',
+			},
+			{
+				title: 'COLLEGIATE',
+				desc: 'Inter-collegiate competition showcasing academic and professional skills.',
+				tags: ['management', 'academic'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLScJzDO0MyrJQVtvmCkiVpC_OfH1da4TCWQiCck2Z1UYyqfYGQ/viewform',
+				img: './public/eventcards/collegiate.jpg',
+			},
+			{
+				title: 'GLIMPSE INTO THE UNFOCUSED',
+				desc: 'An online photography competition based on assigned themes.',
+				tags: ['architecture', 'photography'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSeFH1mzF_tG5UojbuC-zJePwThP-PT33a1ysaRjbfHhB9SZjA/viewform',
+				img: './public/eventcards/glimpse.jpg',
+			},
+
+			// Technical Events
+			{
+				title: 'RC ROBOSOCCER 2.0',
+				desc: 'Build and program robots to play soccer and compete with other teams.',
+				tags: ['technical', 'robotics', 'engineering'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSeN7wq_nVIGBPyjSbk8m_9mFr0O0gwJJelPEUsPNugg-e_LdA/viewform',
+				img: './public/eventcards/robosoc.jpg',
+			},
+			{
+				title: 'MAZE – MERISE',
+				desc: 'Design an autonomous robot to navigate a maze efficiently.',
+				tags: ['technical', 'robotics', 'programming'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSeN7wq_nVIGBPyjSbk8m_9mFr0O0gwJJelPEUsPNugg-e_LdA/viewform',
+				img: './public/eventcards/maze.jpg',
+			},
+			{
+				title: 'ENIGMA REDESIGNED',
+				desc: 'A cryptographic challenge with multiple rounds of code-breaking and debugging.',
+				tags: ['technical', 'coding', 'cryptography'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSeN7wq_nVIGBPyjSbk8m_9mFr0O0gwJJelPEUsPNugg-e_LdA/viewform',
+				img: './public/eventcards/enigma.jpg',
+			},
+			{
+				title: 'SPARK-A-THON',
+				desc: 'Pitch innovative tech solutions through ideation and prototyping.',
+				tags: ['technical', 'innovation', 'pitching'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSeN7wq_nVIGBPyjSbk8m_9mFr0O0gwJJelPEUsPNugg-e_LdA/viewform',
+				img: './public/eventcards/spark.jpg',
+			},
+			{
+				title: 'SMART PITCH',
+				desc: 'Pitch civil engineering ideas with innovative business models.',
+				tags: ['technical', 'pitching', 'civil engineering'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSeN7wq_nVIGBPyjSbk8m_9mFr0O0gwJJelPEUsPNugg-e_LdA/viewform',
+				img: './public/eventcards/smartpitch.jpg',
+			},
+			{
+				title: 'INNOVATIVE CAD DESIGNER',
+				desc: 'Showcase creativity and skill in computer-aided design.',
+				tags: ['technical', 'design', 'CAD'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSeN7wq_nVIGBPyjSbk8m_9mFr0O0gwJJelPEUsPNugg-e_LdA/viewform',
+				img: './public/eventcards/cad.jpg',
+			},
+			{
+				title: 'THE GENTLEMAN BURGLAR',
+				desc: 'Simulate a bank heist through rounds focused on decryption, debugging, and circuit design.',
+				tags: ['technical', 'coding', 'circuit design'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSeN7wq_nVIGBPyjSbk8m_9mFr0O0gwJJelPEUsPNugg-e_LdA/viewform',
+				img: './public/eventcards/gentlemen.jpg',
+			},
+			{
+				title: 'OHM-AZING BUILD-A-THON',
+				desc: 'Timed circuit-building rounds to test electrical engineering skills.',
+				tags: ['technical', 'circuit design', 'engineering'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSeN7wq_nVIGBPyjSbk8m_9mFr0O0gwJJelPEUsPNugg-e_LdA/viewform',
+				img: './public/eventcards/ohmazing.jpg',
+			},
+			{
+				title: 'EV HACKATHON',
+				desc: 'Engage in electric vehicle challenges, from part identification to real-time battery monitoring.',
+				tags: ['technical', 'engineering', 'sustainability'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSeN7wq_nVIGBPyjSbk8m_9mFr0O0gwJJelPEUsPNugg-e_LdA/viewform',
+				img: './public/eventcards/evhackathon.jpg',
+			},
+
+			// Psychology Events
+			{
+				title: 'HOW I MET YOUR KILLER',
+				desc: 'Solve a fictional murder mystery through detective skills and teamwork.',
+				tags: ['psychology', 'mystery', 'teamwork'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSci6pUM6ma06tt3Jtf3OtZw_XFIth8vypqi6-XtjjUDPKZSgw/viewform',
+				img: './public/eventcards/kill.jpg',
+			},
+			{
+				title: 'AD-VENTURE',
+				desc: 'Reimagine ordinary products and pitch creative marketing campaigns.',
+				tags: ['psychology', 'creativity', 'marketing'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSci6pUM6ma06tt3Jtf3OtZw_XFIth8vypqi6-XtjjUDPKZSgw/viewform',
+				img: './public/eventcards/adventure.jpg',
+			},
+			{
+				title: 'Switch and Scene',
+				desc: 'Pairs of performers dive into spontaneous improv, facing sudden role reversals and genre changes.',
+				tags: ['psychology', 'creativity', 'theatre'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSci6pUM6ma06tt3Jtf3OtZw_XFIth8vypqi6-XtjjUDPKZSgw/viewform',
+				img: './public/eventcards/switch.jpg',
+			},
+			{
+				title: 'INK AND TALE',
+				desc: 'Create a captivating short story or comic based on assigned characters and genres.',
+				tags: ['psychology', 'creativity', 'storytelling'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSd89HjabndqYQd7GBVYeSbia3lVjZg-pUbfS7Xg9Fvyx9yQsA/viewform',
+				img: './public/eventcards/inktale.jpg',
+			},
+
+			// Debate
+			{
+				title: 'Convince and Conquer: The Art of Persuasion',
+				desc: 'A two-day event designed to challenge students to articulate and advocate for robust ideas on achieving academic and professional balance.',
+				tags: ['debate', 'academia'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSdqz6Gyk9WOKXyShoXbT7xHjuLadrF_CsHN3X2ELwpNbYwTTA/viewform',
+				img: './public/eventcards/debate.jpg',
+			},
+
+			// Cultural Events
+			{
+				title: 'BATTLE OF BANDS',
+				desc: 'Showcase your musical talent in an energetic battle of bands competition.',
+				tags: ['cultural', 'music', 'performance'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSd89HjabndqYQd7GBVYeSbia3lVjZg-pUbfS7Xg9Fvyx9yQsA/viewform',
+				img: './public/eventcards/bob.JPG',
+			},
+			{
+				title: 'ACAPELLA AND GROUP SINGING',
+				desc: 'Team singing event celebrating vocal harmony and creativity.',
+				tags: ['cultural', 'music', 'singing'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSd89HjabndqYQd7GBVYeSbia3lVjZg-pUbfS7Xg9Fvyx9yQsA/viewform',
+				img: './public/eventcards/acapella.jpg',
+			},
+			{
+				title: 'SOLO SINGING (WESTERN)',
+				desc: 'Individual singing competition in the western music category.',
+				tags: ['cultural', 'music', 'western', 'solo'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSd89HjabndqYQd7GBVYeSbia3lVjZg-pUbfS7Xg9Fvyx9yQsA/viewform',
+				img: './public/eventcards/westernsolo.png',
+			},
+			{
+				title: 'SOLO SINGING (INDIAN)',
+				desc: 'Showcase talent in Indian music with solo singing performances.',
+				tags: ['cultural', 'music', 'solo', 'indian'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSd89HjabndqYQd7GBVYeSbia3lVjZg-pUbfS7Xg9Fvyx9yQsA/viewform',
+				img: './public/eventcards/indiansolo.JPG',
+			},
+			{
+				title: 'INDIAN GROUP DANCE',
+				desc: 'A group dance competition celebrating Indian dance forms.',
+				tags: ['cultural', 'dance', 'indian'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSd89HjabndqYQd7GBVYeSbia3lVjZg-pUbfS7Xg9Fvyx9yQsA/viewform',
+				img: './public/eventcards/indiangroup.jpg',
+			},
+			{
+				title: 'WESTERN GROUP DANCE',
+				desc: 'Group dance competition focusing on Western dance styles.',
+				tags: ['cultural', 'dance', 'Western'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSd89HjabndqYQd7GBVYeSbia3lVjZg-pUbfS7Xg9Fvyx9yQsA/viewform',
+				img: './public/eventcards/westerngroup.jpg',
+			},
+			{
+				title: 'SPOT CHOREOGRAPHY',
+				desc: 'A fast-paced choreography competition with on-the-spot themes.',
+				tags: ['cultural', 'dance', 'choreography'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSd89HjabndqYQd7GBVYeSbia3lVjZg-pUbfS7Xg9Fvyx9yQsA/viewform',
+				img: './public/eventcards/spotchoreo.JPG',
+			},
+			{
+				title: 'STREET PLAY',
+				desc: 'Perform compelling street theater with social or comedic themes.',
+				tags: ['cultural', 'theater', 'social'],
+				link: 'https://docs.google.com/forms/d/e/1FAIpQLSd89HjabndqYQd7GBVYeSbia3lVjZg-pUbfS7Xg9Fvyx9yQsA/viewform',
+				img: './public/eventcards/streetplay.jpg',
+			},
+		];
+
+		let currentFilter = 'all';
+		let filteredEvents = events;
+
+		// Main categories only
+		const mainCategories = [
+			'management',
+			'architecture',
+			'technical',
+			'psychology',
+			'debate',
+			'cultural',
+		];
+
+		// Initialize the page
+		function initializePage() {
+			console.log('Initializing events page...');
+			console.log('Events data:', events.length, 'events loaded');
+			createFilterTags();
+			renderEvents(events);
+			setupEventListeners();
+			console.log('Events page initialized successfully');
+		}
+
+		// Create filter tags
+		function createFilterTags() {
+			const filterContainer = document.getElementById('filterTags');
+
+			mainCategories.forEach((tag) => {
+				const tagElement = document.createElement('div');
+				tagElement.className = 'filter-tag';
+				tagElement.textContent = tag.charAt(0).toUpperCase() + tag.slice(1);
+				tagElement.setAttribute('data-tag', tag);
+				tagElement.addEventListener('click', () => filterByTag(tag));
+				filterContainer.appendChild(tagElement);
+			});
+		}
+
+		// Render events
+		function renderEvents(eventsList) {
+			console.log('Rendering events:', eventsList.length);
+			const container = document.getElementById('eventsGrid');
+			if (!container) {
+				console.error('Events grid container not found!');
+				return;
+			}
+			container.innerHTML = '';
+
+			eventsList.forEach((event) => {
+				const eventCard = document.createElement('div');
+				eventCard.className = 'event-card';
+
+				const primaryTag = event.tags[0];
+
+				eventCard.innerHTML = `
+          <img src="${event.img}" alt="${
+					event.title
+				}" class="event-image" loading="lazy">
+          <div class="event-category">${
+						primaryTag.charAt(0).toUpperCase() + primaryTag.slice(1)
+					}</div>
+          <h3 class="event-title">${event.title}</h3>
+          <p class="event-description">${event.desc}</p>
+          <div class="event-details">
+            <a href="${event.link}" target="_blank" class="register-btn">
+              Register Now
+            </a>
+          </div>
+        `;
+
+				container.appendChild(eventCard);
+			});
+		}
+
+		// Filter by tag
+		function filterByTag(tag) {
+			currentFilter = tag;
+
+			// Update active tag
+			document.querySelectorAll('.filter-tag').forEach((tagEl) => {
+				tagEl.classList.remove('active');
+				if (
+					tagEl.getAttribute('data-tag') === tag ||
+					(tag === 'all' && tagEl.textContent === 'All')
+				) {
+					tagEl.classList.add('active');
+				}
+			});
+
+			// Filter events
+			if (tag === 'all') {
+				filteredEvents = events;
+			} else {
+				filteredEvents = events.filter((event) => event.tags.includes(tag));
+			}
+
+			// Apply search filter if there's a search query
+			const searchQuery = document
+				.getElementById('searchInput')
+				.value.toLowerCase();
+			if (searchQuery) {
+				filteredEvents = filteredEvents.filter(
+					(event) =>
+						event.title.toLowerCase().includes(searchQuery) ||
+						event.desc.toLowerCase().includes(searchQuery) ||
+						event.tags.some((tag) => tag.toLowerCase().includes(searchQuery))
+				);
+			}
+
+			renderEvents(filteredEvents);
+		}
+
+		// Search functionality
+		function searchEvents(query) {
+			const lowerQuery = query.toLowerCase();
+
+			let searchResults;
+			if (currentFilter === 'all') {
+				searchResults = events;
+			} else {
+				searchResults = events.filter((event) =>
+					event.tags.includes(currentFilter)
+				);
+			}
+
+			if (query) {
+				searchResults = searchResults.filter(
+					(event) =>
+						event.title.toLowerCase().includes(lowerQuery) ||
+						event.desc.toLowerCase().includes(lowerQuery) ||
+						event.tags.some((tag) => tag.toLowerCase().includes(lowerQuery))
+				);
+			}
+
+			renderEvents(searchResults);
+		}
+
+		// Setup event listeners
+		function setupEventListeners() {
+			const searchInput = document.getElementById('searchInput');
+			searchInput.addEventListener('input', (e) => {
+				searchEvents(e.target.value);
+			});
+
+			// All filter
+			document
+				.querySelector('.filter-tag[data-tag="all"]')
+				.addEventListener('click', () => {
+					filterByTag('all');
+				});
+		}
+
+		// Initialize when DOM is loaded
+		document.addEventListener('DOMContentLoaded', initializePage);
+
+		// Also initialize immediately if DOM is already loaded
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initializePage);
+		} else {
+			initializePage();
+		}
+	</script>
+</html>

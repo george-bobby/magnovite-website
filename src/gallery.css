@@ -1,0 +1,110 @@
+/* Gallery reference styles rewritten as normal CSS and adapted to site colors */
+
+:root {
+	--bg: #000000;
+	--text: #ffffff;
+	--accent: #8b5cf6; /* clear violet */
+	--accent-strong: #7c3aed; /* stronger violet */
+}
+
+html,
+body {
+	background: var(--bg);
+	color: var(--text);
+	font-family: 'Montserrat', 'Poppins', Arial, Helvetica, sans-serif;
+	overscroll-behavior: none;
+}
+
+/* Loader */
+.loading {
+	z-index: 999;
+	background: var(--bg);
+	color: var(--text);
+	text-align: center;
+	position: fixed;
+	inset: 0;
+	min-height: 100vh;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 1;
+	visibility: visible;
+	transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.loading.loaded {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.loading .loading-container {
+	position: relative;
+	width: min(420px, 80vw);
+	overflow: hidden;
+	border-radius: 10px;
+	background: rgba(160, 120, 255, 0.08);
+	border: 1px solid rgba(160, 120, 255, 0.25);
+}
+
+.loading .counter {
+	padding: 0.8rem;
+}
+
+.loading .line {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 0;
+	height: 2px;
+	background: var(--accent);
+}
+
+/* Content box (title/info) */
+.body-container .box {
+	position: relative;
+	padding: 32px;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.body-container h1 {
+	font-size: 2rem;
+	margin-bottom: 0.5rem;
+	color: var(--accent);
+}
+
+.body-container p {
+	opacity: 0.8;
+}
+
+/* Override any inherited pink/blue tones from global styles on gallery page */
+body.page-gallery .footer-link {
+	color: var(--accent);
+}
+
+body.page-gallery .nav-link-text::before {
+	background: linear-gradient(
+		to bottom,
+		var(--accent) 0%,
+		var(--accent) 50%,
+		transparent 50%,
+		transparent 100%
+	);
+}
+
+body.page-gallery .social-link:hover {
+	color: var(--accent);
+}
+
+/* Canvas sits behind content */
+canvas.gallery-canvas {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-height: 100vh;
+	display: block;
+	background: var(--bg);
+	z-index: 0;
+}
