@@ -24,96 +24,96 @@
 		<link rel="stylesheet" href="./src/style.css" />
 		<style>
 			/* Mobile First Approach - Additional Optimizations */
-			
+
 			/* Base Mobile Styles */
 			@media (max-width: 480px) {
 				.about-hero::before {
 					opacity: 0.05; /* Reduce background opacity on small screens */
 				}
-				
+
 				.about-hero-content {
 					padding: 0 0.5rem;
 				}
-				
+
 				.section-title::after {
 					height: 3px; /* Thinner underline on mobile */
 				}
-				
+
 				/* Improve map container for mobile */
 				.map-container {
 					height: 250px;
 					margin-top: 1rem;
 				}
-				
+
 				.map-container iframe {
 					height: 250px;
 				}
-				
+
 				/* Better mobile typography */
 				.story-subtitle {
 					font-size: 1.5rem;
 				}
-				
+
 				.story-text {
 					font-size: 0.9rem;
 					line-height: 1.6;
 				}
-				
+
 				/* Mobile-friendly contact details */
 				.contact-details h4 {
 					font-size: 1.1rem;
 					margin-bottom: 0.3rem;
 				}
-				
+
 				.contact-details p {
 					font-size: 0.9rem;
 					line-height: 1.5;
 				}
 			}
-			
+
 			/* Extra small screens */
 			@media (max-width: 360px) {
 				.about-hero {
 					min-height: 400px;
 					height: 60vh;
 				}
-				
+
 				.about-title {
 					font-size: clamp(1.8rem, 18vw, 2.5rem);
 				}
-				
+
 				.hero-stats {
 					flex-direction: column;
 					gap: 0.8rem;
 					max-width: 200px;
 				}
-				
+
 				.hero-stat {
 					padding: 0.8rem 0.5rem;
 				}
-				
+
 				.content-card {
 					padding: 1.2rem 0.8rem;
 				}
-				
+
 				.team-member {
 					padding: 1.5rem 0.8rem;
 				}
 			}
-			
+
 			/* Tablet Portrait */
 			@media (min-width: 481px) and (max-width: 768px) {
 				.stats-grid {
 					grid-template-columns: repeat(2, 1fr);
 					gap: 1.5rem;
 				}
-				
+
 				.team-grid {
 					grid-template-columns: repeat(2, 1fr);
 					gap: 2rem;
 				}
 			}
-			
+
 			/* Performance optimizations for mobile */
 			@media (max-width: 768px) {
 				* {
@@ -121,7 +121,7 @@
 					transform: translateZ(0); /* Standard property for compatibility */
 					backface-visibility: hidden;
 				}
-				
+
 				.content-card,
 				.team-member,
 				.stat-item {
@@ -1677,7 +1677,7 @@
 					if (this.isMobile) {
 						// Reduce animation complexity on mobile for better performance
 						document.body.classList.add('mobile-optimized');
-						
+
 						// Add mobile-specific styles
 						const mobileStyles = document.createElement('style');
 						mobileStyles.textContent = `
@@ -1713,7 +1713,7 @@
 							}
 						`;
 						document.head.appendChild(mobileStyles);
-						
+
 						// Add touch event listeners for better mobile interaction
 						this.addTouchEvents();
 					}
@@ -1723,26 +1723,34 @@
 					// Add smooth touch scrolling for better mobile experience
 					let touchStartY = 0;
 					let touchStartTime = 0;
-					
-					document.addEventListener('touchstart', (e) => {
-						touchStartY = e.touches[0].clientY;
-						touchStartTime = Date.now();
-					}, { passive: true });
-					
-					document.addEventListener('touchend', (e) => {
-						const touchEndY = e.changedTouches[0].clientY;
-						const touchDuration = Date.now() - touchStartTime;
-						const touchDistance = touchStartY - touchEndY;
-						
-						// Implement smooth scroll for quick swipes
-						if (Math.abs(touchDistance) > 50 && touchDuration < 300) {
-							const scrollSpeed = Math.min(Math.abs(touchDistance) * 2, 500);
-							window.scrollBy({
-								top: touchDistance > 0 ? scrollSpeed : -scrollSpeed,
-								behavior: 'smooth'
-							});
-						}
-					}, { passive: true });
+
+					document.addEventListener(
+						'touchstart',
+						(e) => {
+							touchStartY = e.touches[0].clientY;
+							touchStartTime = Date.now();
+						},
+						{ passive: true }
+					);
+
+					document.addEventListener(
+						'touchend',
+						(e) => {
+							const touchEndY = e.changedTouches[0].clientY;
+							const touchDuration = Date.now() - touchStartTime;
+							const touchDistance = touchStartY - touchEndY;
+
+							// Implement smooth scroll for quick swipes
+							if (Math.abs(touchDistance) > 50 && touchDuration < 300) {
+								const scrollSpeed = Math.min(Math.abs(touchDistance) * 2, 500);
+								window.scrollBy({
+									top: touchDistance > 0 ? scrollSpeed : -scrollSpeed,
+									behavior: 'smooth',
+								});
+							}
+						},
+						{ passive: true }
+					);
 				}
 
 				createObserver() {
@@ -1906,32 +1914,50 @@
 				addMobileInteractions() {
 					if (this.isMobile) {
 						// Add touch-friendly interactions
-						document.querySelectorAll('.content-card, .team-member, .contact-item').forEach((element) => {
-							element.addEventListener('touchstart', (e) => {
-								element.style.transform = 'translateY(-5px) scale(1.01)';
-								element.style.transition = 'all 0.2s ease';
-							}, { passive: true });
-							
-							element.addEventListener('touchend', () => {
-								setTimeout(() => {
-									element.style.transform = '';
-								}, 150);
-							}, { passive: true });
-						});
+						document
+							.querySelectorAll('.content-card, .team-member, .contact-item')
+							.forEach((element) => {
+								element.addEventListener(
+									'touchstart',
+									(e) => {
+										element.style.transform = 'translateY(-5px) scale(1.01)';
+										element.style.transition = 'all 0.2s ease';
+									},
+									{ passive: true }
+								);
+
+								element.addEventListener(
+									'touchend',
+									() => {
+										setTimeout(() => {
+											element.style.transform = '';
+										}, 150);
+									},
+									{ passive: true }
+								);
+							});
 
 						// Improve button interactions on mobile
 						document.querySelectorAll('.cta-button').forEach((btn) => {
-							btn.addEventListener('touchstart', (e) => {
-								btn.style.transform = 'translateY(-2px) scale(0.98)';
-								btn.style.boxShadow = '0 10px 25px rgba(255, 0, 255, 0.3)';
-							}, { passive: true });
-							
-							btn.addEventListener('touchend', () => {
-								setTimeout(() => {
-									btn.style.transform = '';
-									btn.style.boxShadow = '';
-								}, 100);
-							}, { passive: true });
+							btn.addEventListener(
+								'touchstart',
+								(e) => {
+									btn.style.transform = 'translateY(-2px) scale(0.98)';
+									btn.style.boxShadow = '0 10px 25px rgba(255, 0, 255, 0.3)';
+								},
+								{ passive: true }
+							);
+
+							btn.addEventListener(
+								'touchend',
+								() => {
+									setTimeout(() => {
+										btn.style.transform = '';
+										btn.style.boxShadow = '';
+									}, 100);
+								},
+								{ passive: true }
+							);
 						});
 					}
 				}
