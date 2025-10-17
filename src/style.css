@@ -359,6 +359,13 @@ body.page-gallery {
 	background: rgba(255, 255, 255, 0.2);
 }
 
+/* Ensure no pseudo-elements on .link class */
+.link::before,
+.link::after {
+	content: none !important;
+	display: none !important;
+}
+
 /* Mobile Navigation */
 @media (max-width: 768px) {
 	.nav-container {

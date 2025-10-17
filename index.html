@@ -174,6 +174,14 @@
 				transform: translateY(0);
 			}
 
+			/* Hide mobile hamburger on desktop */
+			.nav-toggle-2 {
+				display: none;
+			}
+			.nav-toggle-2__bar {
+				display: none;
+			}
+
 			/* Responsive Design */
 			@media (max-width: 768px) {
 				.cta-section {
@@ -182,77 +190,219 @@
 				}
 
 				/* Mobile nav: two-line hamburger morphs to X */
-				.nav-toggle-2 { display:inline-flex; align-items:center; justify-content:center; width:42px; height:36px; margin-left:auto; border-radius:12px; border:1px solid rgba(255,255,255,0.18); background:rgba(0,0,0,0.35); cursor:pointer; position:relative; overflow:hidden; transform: translateX(14px); opacity: 0; animation: slideInBtn .35s ease .2s forwards; z-index: 1002; }
+				.nav-toggle-2 {
+					display: inline-flex;
+					align-items: center;
+					justify-content: center;
+					width: 42px;
+					height: 36px;
+					margin-left: auto;
+					border-radius: 12px;
+					border: 1px solid rgba(255, 255, 255, 0.18);
+					background: rgba(0, 0, 0, 0.35);
+					cursor: pointer;
+					position: relative;
+					overflow: hidden;
+					transform: translateX(14px);
+					opacity: 0;
+					animation: slideInBtn 0.35s ease 0.2s forwards;
+					z-index: 1002;
+				}
 				/* When menu is open, pin the button top-right above the drawer */
-				.nav-toggle-2.is-active { position: fixed; top: 12px; right: 12px; transform: none; }
-				@keyframes slideInBtn { to { transform: translateX(0); opacity:1; } }
-				.nav-toggle-2__bar { position:absolute; left:50%; width:26px; height:4px; border-radius:3px; background:#ffffff; box-shadow: 0 0 0 rgba(0,0,0,0); transform: translateX(-50%); transition: transform .25s ease, opacity .2s ease; }
-				.nav-toggle-2__bar:nth-child(1){ top:11px; }
-				.nav-toggle-2__bar:nth-child(2){ top:23px; }
-				.nav-toggle-2.is-active .nav-toggle-2__bar:nth-child(1){ top:50%; transform: translate(-50%, -50%) rotate(45deg); }
-				.nav-toggle-2.is-active .nav-toggle-2__bar:nth-child(2){ top:50%; transform: translate(-50%, -50%) rotate(-45deg); }
+				.nav-toggle-2.is-active {
+					position: fixed;
+					top: 12px;
+					right: 12px;
+					transform: none;
+				}
+				@keyframes slideInBtn {
+					to {
+						transform: translateX(0);
+						opacity: 1;
+					}
+				}
+				.nav-toggle-2__bar {
+					position: absolute;
+					left: 50%;
+					width: 26px;
+					height: 4px;
+					border-radius: 3px;
+					background: #ffffff;
+					box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+					transform: translateX(-50%);
+					transition: transform 0.25s ease, opacity 0.2s ease;
+				}
+				.nav-toggle-2__bar:nth-child(1) {
+					top: 11px;
+				}
+				.nav-toggle-2__bar:nth-child(2) {
+					top: 23px;
+				}
+				.nav-toggle-2.is-active .nav-toggle-2__bar:nth-child(1) {
+					top: 50%;
+					transform: translate(-50%, -50%) rotate(45deg);
+				}
+				.nav-toggle-2.is-active .nav-toggle-2__bar:nth-child(2) {
+					top: 50%;
+					transform: translate(-50%, -50%) rotate(-45deg);
+				}
 
 				/* Drawer menu slides from right */
-				.nav-menu { position:relative; }
-				.nav-drawer-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.35); backdrop-filter: blur(0px); opacity:0; visibility:hidden; transition: opacity .28s ease, visibility .28s ease, backdrop-filter .28s ease; z-index: 1000; }
-				.nav-drawer-backdrop.is-open { opacity:1; visibility:visible; backdrop-filter: blur(8px); }
-				.nav-menu__links { position: fixed; top:0; right:0; height:100vh; width:min(84vw, 320px); padding:14px; background: rgba(11,11,11,0.98); border-left:1px solid rgba(255,255,255,0.1); box-shadow: -24px 0 60px rgba(0,0,0,0.5); transform: translateX(100%); transition: transform .3s ease; z-index: 1001; display:flex; flex-direction:column; gap:6px; }
-				.nav-menu__links.is-open { transform: translateX(0); padding-top: 64px; }
-				.nav-menu__links .nav-link { display:flex; align-items:center; justify-content:space-between; padding:12px 12px; border-radius:10px; }
+				.nav-menu {
+					position: relative;
+				}
+				.nav-drawer-backdrop {
+					position: fixed;
+					inset: 0;
+					background: rgba(0, 0, 0, 0.35);
+					backdrop-filter: blur(0px);
+					opacity: 0;
+					visibility: hidden;
+					transition: opacity 0.28s ease, visibility 0.28s ease,
+						backdrop-filter 0.28s ease;
+					z-index: 1000;
+				}
+				.nav-drawer-backdrop.is-open {
+					opacity: 1;
+					visibility: visible;
+					backdrop-filter: blur(8px);
+				}
+				.nav-menu__links {
+					position: fixed;
+					top: 0;
+					right: 0;
+					height: 100vh;
+					width: min(84vw, 320px);
+					padding: 14px;
+					background: rgba(11, 11, 11, 0.98);
+					border-left: 1px solid rgba(255, 255, 255, 0.1);
+					box-shadow: -24px 0 60px rgba(0, 0, 0, 0.5);
+					transform: translateX(100%);
+					transition: transform 0.3s ease;
+					z-index: 1001;
+					display: flex;
+					flex-direction: column;
+					gap: 6px;
+				}
+				.nav-menu__links.is-open {
+					transform: translateX(0);
+					padding-top: 64px;
+				}
+				.nav-menu__links .nav-link {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					padding: 12px 12px;
+					border-radius: 10px;
+				}
 				/* Remove any decorative separators/pipes on mobile drawer links */
 				.nav-menu__links .nav-link::after,
-				.nav-menu__links .nav-link::before { content: none !important; display: none !important; }
-				.nav-menu__links .nav-link { border: none !important; }
-				.nav-menu__links .nav-link:hover { background: rgba(255,255,255,0.06); }
+				.nav-menu__links .nav-link::before {
+					content: none !important;
+					display: none !important;
+				}
+				.nav-menu__links .nav-link {
+					border: none !important;
+				}
+				.nav-menu__links .nav-link:hover {
+					background: rgba(255, 255, 255, 0.06);
+				}
 
 				/* Hide desktop links row behind hamburger on mobile */
-				.nav-inner .nav-menu > .nav-menu__links:not(.is-open) { display:block; }
+				.nav-inner .nav-menu > .nav-menu__links:not(.is-open) {
+					display: block;
+				}
 			}
 
 			/* Smooth page blur when nav is open */
-			.blur-target { transition: filter .28s ease; }
-			.is-nav-open .blur-target { filter: blur(8px); }
+			.blur-target {
+				transition: filter 0.28s ease;
+			}
+			.is-nav-open .blur-target {
+				filter: blur(8px);
+			}
 
 			/* Extra mobile spacing to push MAGNOVITE 2025 lower */
 			@media (max-width: 768px) {
-				.hero-text-logo-container { margin-top: 40px !important; }
-				.hero-main-content { margin-top: 28px !important; }
-				.hero-main-logo img { margin-bottom: 26px !important; }
+				.hero-text-logo-container {
+					margin-top: 40px !important;
+				}
+				.hero-main-content {
+					margin-top: 28px !important;
+				}
+				.hero-main-logo img {
+					margin-bottom: 26px !important;
+				}
 			}
 
 			/* Fine-tune for small phones so title sits just below the logo */
 			@media (max-width: 480px) {
-				.hero-main-logo img { margin-bottom: 40px !important; }
-				.hero-main-content { margin-top: 10px !important; }
-				.hero-text { font-size: clamp(18px, 6.2vw, 26px); letter-spacing: 0.02em; }
+				.hero-main-logo img {
+					margin-bottom: 40px !important;
+				}
+				.hero-main-content {
+					margin-top: 10px !important;
+				}
+				.hero-text {
+					font-size: clamp(18px, 6.2vw, 26px);
+					letter-spacing: 0.02em;
+				}
 			}
 
 			/* Sync reveal: hide title until logo image is ready */
-			.hero-main-content { opacity: 0; transform: translateY(8px); transition: opacity .35s ease, transform .35s ease; }
-			.hero-1-container.hero-synced .hero-main-content { opacity: 1; transform: translateY(0); }
+			.hero-main-content {
+				opacity: 0;
+				transform: translateY(8px);
+				transition: opacity 0.35s ease, transform 0.35s ease;
+			}
+			.hero-1-container.hero-synced .hero-main-content {
+				opacity: 1;
+				transform: translateY(0);
+			}
 
 			/* Avoid hero logo/text overlap - mobile spacing boost */
 			@media (max-width: 768px) {
-				.hero-text-logo-container { margin-top: 28px; }
-				.hero-main-content { margin-top: 18px; }
-				.hero-main-logo img { margin-bottom: 22px; }
+				.hero-text-logo-container {
+					margin-top: 28px;
+				}
+				.hero-main-content {
+					margin-top: 18px;
+				}
+				.hero-main-logo img {
+					margin-bottom: 22px;
+				}
 			}
 
 			/* Slight extra spacing on desktop */
 			@media (min-width: 1024px) {
-				.hero-text-logo-container { margin-top: 28px; }
-				.hero-main-content { margin-top: 28px; }
-				.hero-main-logo img { margin-bottom: 20px; }
+				.hero-text-logo-container {
+					margin-top: 28px;
+				}
+				.hero-main-content {
+					margin-top: 28px;
+				}
+				.hero-main-logo img {
+					margin-bottom: 20px;
+				}
 			}
 
 			/* Tablet breakpoint where hamburger appears: add extra separation to prevent overlap */
 			@media (min-width: 769px) and (max-width: 1023px) {
-				.hero-text-logo-container { margin-top: 36px !important; }
-				.hero-main-content { margin-top: 26px !important; }
-				.hero-main-logo img { margin-bottom: 26px !important; }
-				.hero-text { font-size: clamp(22px, 3.2vw, 32px); }
+				.hero-text-logo-container {
+					margin-top: 36px !important;
+				}
+				.hero-main-content {
+					margin-top: 26px !important;
+				}
+				.hero-main-logo img {
+					margin-bottom: 26px !important;
+				}
+				.hero-text {
+					font-size: clamp(22px, 3.2vw, 32px);
+				}
 			}
 
+			@media (max-width: 768px) {
 				.cta-buttons {
 					flex-direction: column;
 					align-items: center;
@@ -283,7 +433,12 @@
 						</a>
 						<div class="nav-menu">
 							<div class="nav-drawer-backdrop" id="navBackdrop"></div>
-							<button class="nav-toggle-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+							<button
+								class="nav-toggle-2"
+								aria-label="Open menu"
+								aria-expanded="false"
+								aria-controls="mobileMenu"
+							>
 								<span class="nav-toggle-2__bar"></span>
 								<span class="nav-toggle-2__bar"></span>
 							</button>
@@ -355,14 +510,21 @@
 			</div>
 		</header>
 
-			<div class="container blur-target">
+		<div class="container blur-target">
 			<div class="overlay"></div>
 			<div class="hero-1-container">
 				<div class="hero-main-container">
 					<h1 class="hero-main-logo" aria-label="Are you excited?">
 						<img src="./public/excited.png" alt="Are you excited?" />
 					</h1>
-					<video class="hero-main-image" autoplay muted loop playsinline preload="auto">
+					<video
+						class="hero-main-image"
+						autoplay
+						muted
+						loop
+						playsinline
+						preload="auto"
+					>
 						<source src="./public/initialbg.mp4" type="video/mp4" />
 					</video>
 				</div>
@@ -571,13 +733,13 @@
 	<script defer src="./src/script.js"></script>
 	<script>
 		// Mobile drawer + two-line hamburger
-		document.addEventListener('DOMContentLoaded', function(){
+		document.addEventListener('DOMContentLoaded', function () {
 			var toggle = document.querySelector('.nav-toggle-2');
 			var menu = document.getElementById('mobileMenu');
 			var backdrop = document.getElementById('navBackdrop');
 			var pageRoot = document.querySelector('.container.blur-target');
 			if (!toggle || !menu || !backdrop) return;
-			function setOpen(open){
+			function setOpen(open) {
 				menu.classList.toggle('is-open', open);
 				backdrop.classList.toggle('is-open', open);
 				toggle.classList.toggle('is-active', open);
@@ -590,58 +752,83 @@
 					}
 				}
 			}
-			toggle.addEventListener('click', function(){ setOpen(!menu.classList.contains('is-open')); });
-			backdrop.addEventListener('click', function(){ setOpen(false); });
+			toggle.addEventListener('click', function () {
+				setOpen(!menu.classList.contains('is-open'));
+			});
+			backdrop.addEventListener('click', function () {
+				setOpen(false);
+			});
 			// Close when pressing ESC
-			document.addEventListener('keydown', function(e){ if (e.key === 'Escape') setOpen(false); });
+			document.addEventListener('keydown', function (e) {
+				if (e.key === 'Escape') setOpen(false);
+			});
 			// Close when clicking a link in the drawer
-			menu.addEventListener('click', function(e){
+			menu.addEventListener('click', function (e) {
 				var t = e.target;
 				if (t && t.closest && t.closest('a.nav-link')) setOpen(false);
 			});
 		});
 
 		// Ensure background video auto-plays promptly on load and first interaction
-		(function(){
-			function tryPlayVideo(){
+		(function () {
+			function tryPlayVideo() {
 				var vid = document.querySelector('.hero-main-image');
 				var hero = document.querySelector('.hero-1-container');
 				if (!vid) return;
 				try {
 					vid.muted = true; // reinforce autoplay policy
-					if (vid.readyState < 2) { // HAVE_CURRENT_DATA
+					if (vid.readyState < 2) {
+						// HAVE_CURRENT_DATA
 						vid.load();
 					}
 					var p = vid.play();
 					if (p && typeof p.then === 'function') {
-						p.catch(function(){ /* ignore - will retry on interaction */ });
+						p.catch(function () {
+							/* ignore - will retry on interaction */
+						});
 					}
-				} catch(_) {}
+				} catch (_) {}
 				// When hero logo image loads, sync in the title reveal
 				var logoImg = document.querySelector('.hero-main-logo img');
 				if (logoImg && hero) {
 					if (logoImg.complete) {
 						hero.classList.add('hero-synced');
 					} else {
-						logoImg.addEventListener('load', function(){ hero.classList.add('hero-synced'); }, { once: true });
+						logoImg.addEventListener(
+							'load',
+							function () {
+								hero.classList.add('hero-synced');
+							},
+							{ once: true }
+						);
 					}
 				}
 			}
 
-			if (document.readyState === 'complete' || document.readyState === 'interactive') {
+			if (
+				document.readyState === 'complete' ||
+				document.readyState === 'interactive'
+			) {
 				tryPlayVideo();
 			} else {
 				document.addEventListener('DOMContentLoaded', tryPlayVideo);
 			}
 
 			// Retry on first user interaction or visibility change
-			var once = function(fn){
-				var done = false; return function(){ if (done) return; done = true; fn(); };
+			var once = function (fn) {
+				var done = false;
+				return function () {
+					if (done) return;
+					done = true;
+					fn();
+				};
 			};
 			var oneShot = once(tryPlayVideo);
-			['click','touchstart','scroll','keydown','visibilitychange'].forEach(function(evt){
-				window.addEventListener(evt, oneShot, { passive: true, once: true });
-			});
+			['click', 'touchstart', 'scroll', 'keydown', 'visibilitychange'].forEach(
+				function (evt) {
+					window.addEventListener(evt, oneShot, { passive: true, once: true });
+				}
+			);
 		})();
 
 		// CTA Section JavaScript

@@ -1400,6 +1400,10 @@
 				opacity: 1;
 				transform: translateY(0);
 			}
+    /* Hide mobile hamburger on desktop */
+    .nav-toggle-2 { display:none; }
+    .nav-toggle-2__bar { display:none; }
+
     /* Mobile drawer nav (match index) */
     @media (max-width: 768px) {
       .nav-toggle-2 { display:inline-flex; align-items:center; justify-content:center; width:42px; height:36px; margin-left:auto; border-radius:12px; border:1px solid rgba(255,255,255,0.18); background:rgba(0,0,0,0.35); cursor:pointer; position:relative; overflow:hidden; transform: translateX(14px); opacity: 0; animation: abSlideInBtn .35s ease .2s forwards; z-index: 1002; }
