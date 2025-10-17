@@ -1,0 +1,118 @@
+.loader {
+    transition: all 0.5s ease;
+  height: 100vh;
+  width: 100%;
+  background: #111;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  align-items: center;
+  z-index: 10000;
+  top: 0;
+}
+
+.bubble {
+  position: absolute;
+  width: 750px;
+  height: 750px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(180deg, #0F9E78 20.5%, #310538 100%);
+  filter: blur(250px);
+  transition: all 0.5s ease;
+  animation: loadRotate 1s 0.2s infinite;
+}
+
+.loader .loading {
+  font-size:  1.5vw;
+  font-weight: 900;
+  display: flex;
+  gap: 5px; /* Space between each span */
+  animation: loading08-parent 5s infinite;
+}
+
+.loader .loading span {
+  position: relative;
+  display: inline-block;
+  color: rgba(0, 0, 0, 0.2); /* Initial text color */
+}
+
+.loader .loading span::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: attr(data-text);
+  color: #fff;
+  opacity: 0;
+  animation: loading08-child 5s infinite;
+  z-index: 1;
+}
+
+.loading span:nth-child(2)::after {
+  animation-delay: 0.5s;
+}
+
+.loading span:nth-child(3)::after {
+  animation-delay: 0.7s;
+}
+
+.loading span:nth-child(4)::after {
+  animation-delay: 0.9s;
+}
+
+.loading span:nth-child(5)::after {
+  animation-delay: 1.1s;
+}
+
+.loading span:nth-child(6)::after {
+  animation-delay: 1.3s;
+}
+
+.loading span:nth-child(7)::after {
+  animation-delay: 1.2s;
+}
+
+.loading span:nth-child(8)::after {
+  animation-delay: 1.4s;
+}
+
+@keyframes loading08-child {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  25%, 100% {
+    opacity: 0;
+    transform: translateY(-10px); /* Small shift to reduce overlap */
+  }
+}
+
+@keyframes loading08-parent {
+  0%, 35%, 100% {
+    color: rgba(0, 0, 0, 0.2);
+  }
+  60%, 80% {
+    color: #fff;
+  }
+}
+
+@keyframes loadRotate {
+  0% {
+    transform: scale(0.8) translate(-50%, -50%);
+  }
+  50% {
+    transform: scale(1.2) translate(-50%, -50%);
+  }
+  100% {
+    transform: scale(1) translate(-50%, -50%);
+  }
+}
+@media only screen and (max-width:768px){
+    
+    .loading {
+            font-size: 5vw !important;
+        }
+}

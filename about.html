@@ -391,6 +391,54 @@
 				overflow: hidden;
 				border: 1px solid rgba(255, 255, 255, 0.1);
 				height: fit-content;
+				position: relative;
+			}
+
+			.map-container iframe {
+				filter: invert(0.9) hue-rotate(180deg) contrast(1.2) brightness(0.8);
+				transition: filter 0.3s ease;
+			}
+
+			.map-container:hover iframe {
+				filter: invert(0.95) hue-rotate(180deg) contrast(1.3) brightness(0.9);
+			}
+
+			.map-actions {
+				position: absolute;
+				top: 15px;
+				right: 15px;
+				z-index: 10;
+			}
+
+			.open-maps-btn {
+				display: inline-flex;
+				align-items: center;
+				background: rgba(0, 0, 0, 0.8);
+				color: #ffffff;
+				padding: 10px 16px;
+				border-radius: 25px;
+				text-decoration: none;
+				font-size: 0.9rem;
+				font-weight: 600;
+				backdrop-filter: blur(10px);
+				border: 1px solid rgba(255, 255, 255, 0.2);
+				transition: all 0.3s ease;
+				box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+			}
+
+			.open-maps-btn:hover {
+				background: rgba(255, 0, 255, 0.9);
+				border-color: #ff00ff;
+				transform: translateY(-2px);
+				box-shadow: 0 6px 20px rgba(255, 0, 255, 0.4);
+			}
+
+			.open-maps-btn svg {
+				transition: transform 0.3s ease;
+			}
+
+			.open-maps-btn:hover svg {
+				transform: scale(1.1);
 			}
 
 			.cta-buttons {
@@ -1352,6 +1400,26 @@
 				opacity: 1;
 				transform: translateY(0);
 			}
+    /* Mobile drawer nav (match index) */
+    @media (max-width: 768px) {
+      .nav-toggle-2 { display:inline-flex; align-items:center; justify-content:center; width:42px; height:36px; margin-left:auto; border-radius:12px; border:1px solid rgba(255,255,255,0.18); background:rgba(0,0,0,0.35); cursor:pointer; position:relative; overflow:hidden; transform: translateX(14px); opacity: 0; animation: abSlideInBtn .35s ease .2s forwards; z-index: 1002; }
+      .nav-toggle-2.is-active { position: fixed; top: 12px; right: 12px; transform: none; }
+      @keyframes abSlideInBtn { to { transform: translateX(0); opacity:1; } }
+      .nav-toggle-2__bar { position:absolute; left:50%; width:26px; height:4px; border-radius:3px; background:#ffffff; transform: translateX(-50%); transition: transform .25s ease, opacity .2s ease; }
+      .nav-toggle-2__bar:nth-child(1){ top:11px; }
+      .nav-toggle-2__bar:nth-child(2){ top:23px; }
+      .nav-toggle-2.is-active .nav-toggle-2__bar:nth-child(1){ top:50%; transform: translate(-50%, -50%) rotate(45deg); }
+      .nav-toggle-2.is-active .nav-toggle-2__bar:nth-child(2){ top:50%; transform: translate(-50%, -50%) rotate(-45deg); }
+
+      .nav-drawer-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.35); backdrop-filter: blur(0px); opacity:0; visibility:hidden; transition: opacity .28s ease, visibility .28s ease, backdrop-filter .28s ease; z-index: 1000; }
+      .nav-drawer-backdrop.is-open { opacity:1; visibility:visible; backdrop-filter: blur(8px); }
+      .nav-menu__links { position: fixed; top:0; right:0; height:100vh; width:min(84vw, 320px); padding:14px; background: rgba(11,11,11,0.98); border-left:1px solid rgba(255,255,255,0.1); box-shadow: -24px 0 60px rgba(0,0,0,0.5); transform: translateX(100%); transition: transform .3s ease; z-index: 1001; display:flex; flex-direction:column; gap:6px; }
+      .nav-menu__links.is-open { transform: translateX(0); padding-top: 64px; }
+      .nav-menu__links .nav-link { display:flex; align-items:center; justify-content:space-between; padding:12px 12px; border-radius:10px; border:none !important; }
+      .nav-menu__links .nav-link::after, .nav-menu__links .nav-link::before { content:none !important; }
+    }
+    .blur-target { transition: filter .28s ease; }
+    .is-nav-open .blur-target { filter: blur(8px); }
 		</style>
 	</head>
 	<body id="about" class="page-about">
@@ -1371,8 +1439,13 @@
 								class="nav-logo-img"
 							/>
 						</a>
-						<div class="nav-menu">
-							<div class="nav-menu__links">
+        <div class="nav-menu">
+            <div class="nav-drawer-backdrop" id="navBackdrop"></div>
+            <button class="nav-toggle-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+                <span class="nav-toggle-2__bar"></span>
+                <span class="nav-toggle-2__bar"></span>
+            </button>
+            <div class="nav-menu__links" id="mobileMenu">
 								<a href="index.html" class="link nav-link">
 									<span class="nav-link-text">Home</span>
 									<svg
@@ -1440,7 +1513,7 @@
 			</div>
 		</header>
 
-		<div class="about-container">
+        <div class="about-container blur-target">
 			<!-- Hero Section -->
 			<section class="about-hero">
 				<div class="about-hero-content">
@@ -1549,7 +1622,7 @@
 						</div>
 						<div class="map-container">
 							<iframe
-								src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.158755478985!2d77.49263731482233!3d13.017654990811992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3d38b5e1c5b1%3A0x3c884b7c9b0e4c1a!2sCHRIST%20(Deemed%20to%20be%20University)%20Kengeri%20Campus!5e0!3m2!1sen!2sin!4v1642583945123!5m2!1sen!2sin"
+								src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.158755478985!2d77.4379779!3d12.8630352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae472f365fe219%3A0xcae219b3b46324db!2sCHRIST%20(Deemed%20to%20be%20University)%20Bangalore%20Kengeri%20Campus!5e0!3m2!1sen!2sin!4v1729685395465!5m2!1sen!2sin&t=m&z=15&q=CHRIST+University+Kengeri+Campus"
 								width="100%"
 								height="400"
 								style="border: 0; border-radius: 15px"
@@ -1558,6 +1631,19 @@
 								referrerpolicy="no-referrer-when-downgrade"
 							>
 							</iframe>
+							<div class="map-actions">
+								<a 
+									href="https://www.google.com/maps?q=12.8630352,77.4379779" 
+									target="_blank" 
+									class="open-maps-btn"
+									aria-label="Open location in Google Maps"
+								>
+									<svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+										<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+									</svg>
+									Open in Google Maps
+								</a>
+							</div>
 						</div>
 					</div>
 				</section>
@@ -1658,7 +1744,26 @@
 			</footer>
 		</div>
 
-		<script>
+    <script>
+        // Mobile drawer + blur
+        (function(){
+            var toggle = document.querySelector('.nav-toggle-2');
+            var menu = document.getElementById('mobileMenu');
+            var backdrop = document.getElementById('navBackdrop');
+            if (toggle && menu && backdrop) {
+                function setOpen(open){
+                    menu.classList.toggle('is-open', open);
+                    backdrop.classList.toggle('is-open', open);
+                    toggle.classList.toggle('is-active', open);
+                    toggle.setAttribute('aria-expanded', String(open));
+                    if (open) document.documentElement.classList.add('is-nav-open'); else document.documentElement.classList.remove('is-nav-open');
+                }
+                toggle.addEventListener('click', function(){ setOpen(!menu.classList.contains('is-open')); });
+                backdrop.addEventListener('click', function(){ setOpen(false); });
+                document.addEventListener('keydown', function(e){ if (e.key==='Escape') setOpen(false); });
+                menu.addEventListener('click', function(e){ var t=e.target; if (t && t.closest && t.closest('a.nav-link')) setOpen(false); });
+            }
+        })();
 			// Enhanced Scroll Animation System with Mobile Optimizations
 			class ScrollAnimationManager {
 				constructor() {

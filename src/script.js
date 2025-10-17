@@ -55,10 +55,10 @@ if (typeof window !== 'undefined' && typeof window.gsap !== 'undefined') {
     const tl = window.gsap.timeline({
       scrollTrigger: {
         trigger: ".container",
-        scrub: 2,
+        scrub: 2.2, // slightly slower scrub for longer presence
         pin: true,
         start: "top top",
-        end: "+=2000",
+        end: "+=2300", // extend distance so hero stays a bit longer
         ease: "none",
       },
     });
@@ -96,6 +96,31 @@ if (typeof window !== 'undefined' && typeof window.gsap !== 'undefined') {
           rgb(80, 140, 255) 90.0183vh,
           rgba(32, 31, 66, 0) 140.599vh)`, duration: 3 },
       "<1.2"
+    );
+    tl.fromTo(
+      ".hero-tagline",
+      { 
+        opacity: 0, 
+        y: 30,
+        backgroundImage: `radial-gradient(
+            circle at 50% 200vh,
+            rgba(255, 214, 135, 0) 0,
+            rgba(157, 47, 106, 0.5) 90vh,
+            rgba(157, 47, 106, 0.8) 120vh,
+            rgba(32, 31, 66, 0) 150vh
+          )` 
+      },
+      { 
+        opacity: 1, 
+        y: 0,
+        backgroundImage: `radial-gradient(circle at 50% 3.9575vh,
+          rgb(210, 180, 255) 0vh,
+          rgb(160, 120, 255) 50.011vh,
+          rgb(80, 140, 255) 90.0183vh,
+          rgba(32, 31, 66, 0) 140.599vh)`, 
+        duration: 3 
+      },
+      "<0.2"
     );
     tl.fromTo(
       ".hero-text-logo",

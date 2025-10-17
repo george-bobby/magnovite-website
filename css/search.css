@@ -1,0 +1,123 @@
+.search{
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    transition: all 0.4s ease;
+    font-family: "Inter", sans-serif;
+    color: #eee;
+    width: 20vw;
+    border-radius: 10px;
+    cursor: auto;
+}
+.search::placeholder{
+    color: rgba(255, 255, 255, 0.05);
+}
+.search:focus{
+    outline: none;
+    background: rgba(255, 255, 255, 0.08);
+    border:2px solid rgba(255, 255, 255, 0.08);
+}
+.active{
+    background: rgba(255, 255, 255, 0.5);
+}
+.active span{
+    color: #111 !important;
+}
+@media only screen and (max-width:768px){
+    .search{
+        width: 80%;
+    }
+}
+.select-container{
+    position: relative;
+    display: inline-block;
+    width: 17.5vw;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.06);
+    text-align: left;
+    color: #fff;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-bottom: 20px;
+    margin-left: .5vw;
+    border:2px solid rgba(255,255,255,0.06);        
+}
+.select-container svg{
+    float: right;
+    margin-top: .5vw;
+}
+.dropdown {
+transition: 0.3s;
+
+position: absolute;
+top: 120%;
+right: 0;
+left: 0;
+
+margin: 0;
+padding: 0;
+
+list-style: none;
+
+z-index: 99;
+
+border-radius: 15px;
+box-shadow: inherit;
+background: rgba(255,255,255,0.06);
+backdrop-filter: blur(5.6px);
+-webkit-transform-origin: top;
+-moz-transform-origin: top;
+-ms-transform-origin: top;
+transform-origin: top;
+
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+
+opacity: 0;
+visibility: hidden;
+}
+.dropdown li {
+padding: 0 15px;
+line-height: 45px;
+overflow: hidden;
+}
+.dropdown li:last-child {
+border-bottom: none;
+}
+
+.dropdown {
+padding: 0.5rem !important;
+}
+.dropdown li:hover {
+background-color: rgba(255,255,255,0.06);
+border-radius: 10px;
+}
+.select-container.active .dropdown {
+opacity: 1;
+visibility: visible;
+overflow-y: scroll;
+height: 15vw  ;
+border-radius: 15px;
+}
+
+.selected-display {
+margin-left: 10px;
+margin-top: 25px;
+}
+@media only screen and (max-width:765px){
+.select-container{
+    width: 70.5%;
+    margin-top: 2.5vw;
+    border-radius: 10px;
+}
+.select-container.active .dropdown{
+    height: 45vw;
+}
+}

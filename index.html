@@ -181,6 +181,78 @@
 					margin: 4rem 0 2rem;
 				}
 
+				/* Mobile nav: two-line hamburger morphs to X */
+				.nav-toggle-2 { display:inline-flex; align-items:center; justify-content:center; width:42px; height:36px; margin-left:auto; border-radius:12px; border:1px solid rgba(255,255,255,0.18); background:rgba(0,0,0,0.35); cursor:pointer; position:relative; overflow:hidden; transform: translateX(14px); opacity: 0; animation: slideInBtn .35s ease .2s forwards; z-index: 1002; }
+				/* When menu is open, pin the button top-right above the drawer */
+				.nav-toggle-2.is-active { position: fixed; top: 12px; right: 12px; transform: none; }
+				@keyframes slideInBtn { to { transform: translateX(0); opacity:1; } }
+				.nav-toggle-2__bar { position:absolute; left:50%; width:26px; height:4px; border-radius:3px; background:#ffffff; box-shadow: 0 0 0 rgba(0,0,0,0); transform: translateX(-50%); transition: transform .25s ease, opacity .2s ease; }
+				.nav-toggle-2__bar:nth-child(1){ top:11px; }
+				.nav-toggle-2__bar:nth-child(2){ top:23px; }
+				.nav-toggle-2.is-active .nav-toggle-2__bar:nth-child(1){ top:50%; transform: translate(-50%, -50%) rotate(45deg); }
+				.nav-toggle-2.is-active .nav-toggle-2__bar:nth-child(2){ top:50%; transform: translate(-50%, -50%) rotate(-45deg); }
+
+				/* Drawer menu slides from right */
+				.nav-menu { position:relative; }
+				.nav-drawer-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.35); backdrop-filter: blur(0px); opacity:0; visibility:hidden; transition: opacity .28s ease, visibility .28s ease, backdrop-filter .28s ease; z-index: 1000; }
+				.nav-drawer-backdrop.is-open { opacity:1; visibility:visible; backdrop-filter: blur(8px); }
+				.nav-menu__links { position: fixed; top:0; right:0; height:100vh; width:min(84vw, 320px); padding:14px; background: rgba(11,11,11,0.98); border-left:1px solid rgba(255,255,255,0.1); box-shadow: -24px 0 60px rgba(0,0,0,0.5); transform: translateX(100%); transition: transform .3s ease; z-index: 1001; display:flex; flex-direction:column; gap:6px; }
+				.nav-menu__links.is-open { transform: translateX(0); padding-top: 64px; }
+				.nav-menu__links .nav-link { display:flex; align-items:center; justify-content:space-between; padding:12px 12px; border-radius:10px; }
+				/* Remove any decorative separators/pipes on mobile drawer links */
+				.nav-menu__links .nav-link::after,
+				.nav-menu__links .nav-link::before { content: none !important; display: none !important; }
+				.nav-menu__links .nav-link { border: none !important; }
+				.nav-menu__links .nav-link:hover { background: rgba(255,255,255,0.06); }
+
+				/* Hide desktop links row behind hamburger on mobile */
+				.nav-inner .nav-menu > .nav-menu__links:not(.is-open) { display:block; }
+			}
+
+			/* Smooth page blur when nav is open */
+			.blur-target { transition: filter .28s ease; }
+			.is-nav-open .blur-target { filter: blur(8px); }
+
+			/* Extra mobile spacing to push MAGNOVITE 2025 lower */
+			@media (max-width: 768px) {
+				.hero-text-logo-container { margin-top: 40px !important; }
+				.hero-main-content { margin-top: 28px !important; }
+				.hero-main-logo img { margin-bottom: 26px !important; }
+			}
+
+			/* Fine-tune for small phones so title sits just below the logo */
+			@media (max-width: 480px) {
+				.hero-main-logo img { margin-bottom: 40px !important; }
+				.hero-main-content { margin-top: 10px !important; }
+				.hero-text { font-size: clamp(18px, 6.2vw, 26px); letter-spacing: 0.02em; }
+			}
+
+			/* Sync reveal: hide title until logo image is ready */
+			.hero-main-content { opacity: 0; transform: translateY(8px); transition: opacity .35s ease, transform .35s ease; }
+			.hero-1-container.hero-synced .hero-main-content { opacity: 1; transform: translateY(0); }
+
+			/* Avoid hero logo/text overlap - mobile spacing boost */
+			@media (max-width: 768px) {
+				.hero-text-logo-container { margin-top: 28px; }
+				.hero-main-content { margin-top: 18px; }
+				.hero-main-logo img { margin-bottom: 22px; }
+			}
+
+			/* Slight extra spacing on desktop */
+			@media (min-width: 1024px) {
+				.hero-text-logo-container { margin-top: 28px; }
+				.hero-main-content { margin-top: 28px; }
+				.hero-main-logo img { margin-bottom: 20px; }
+			}
+
+			/* Tablet breakpoint where hamburger appears: add extra separation to prevent overlap */
+			@media (min-width: 769px) and (max-width: 1023px) {
+				.hero-text-logo-container { margin-top: 36px !important; }
+				.hero-main-content { margin-top: 26px !important; }
+				.hero-main-logo img { margin-bottom: 26px !important; }
+				.hero-text { font-size: clamp(22px, 3.2vw, 32px); }
+			}
+
 				.cta-buttons {
 					flex-direction: column;
 					align-items: center;
@@ -210,8 +282,13 @@
 							/>
 						</a>
 						<div class="nav-menu">
-							<div class="nav-menu__links">
-								<a href="/index.html" class="link nav-link">
+							<div class="nav-drawer-backdrop" id="navBackdrop"></div>
+							<button class="nav-toggle-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+								<span class="nav-toggle-2__bar"></span>
+								<span class="nav-toggle-2__bar"></span>
+							</button>
+							<div class="nav-menu__links" id="mobileMenu">
+								<a href="index.html" class="link nav-link">
 									<span class="nav-link-text">Home</span>
 									<svg
 										class="nav-link-arrow"
@@ -226,7 +303,7 @@
 										></path>
 									</svg>
 								</a>
-								<a href="/events.html" class="link nav-link">
+								<a href="events.html" class="link nav-link">
 									<span class="nav-link-text">Events</span>
 									<svg
 										class="nav-link-arrow"
@@ -241,7 +318,7 @@
 										></path>
 									</svg>
 								</a>
-								<a href="/about.html" class="link nav-link">
+								<a href="about.html" class="link nav-link">
 									<span class="nav-link-text">About</span>
 									<svg
 										class="nav-link-arrow"
@@ -256,7 +333,7 @@
 										></path>
 									</svg>
 								</a>
-								<a href="/gallery.html" class="link nav-link">
+								<a href="gallery.html" class="link nav-link">
 									<span class="nav-link-text">Gallery</span>
 									<svg
 										class="nav-link-arrow"
@@ -278,24 +355,32 @@
 			</div>
 		</header>
 
-		<div class="container">
+			<div class="container blur-target">
 			<div class="overlay"></div>
 			<div class="hero-1-container">
 				<div class="hero-main-container">
 					<h1 class="hero-main-logo" aria-label="Are you excited?">
 						<img src="./public/excited.png" alt="Are you excited?" />
 					</h1>
-					<video class="hero-main-image" autoplay muted loop playsinline>
+					<video class="hero-main-image" autoplay muted loop playsinline preload="auto">
 						<source src="./public/initialbg.mp4" type="video/mp4" />
 					</video>
 				</div>
 				<div class="hero-text-logo-container">
 					<div class="hero-text-logo"></div>
-					<div>
-						<h3 class="hero-text">
-							MAGNOVITE<br />
-							2025
-						</h3>
+					<div class="hero-content-wrapper">
+						<div class="hero-vertical-text">
+							<h3 class="hero-text-vertical">
+								MAGNOVITE<br />
+								2025
+							</h3>
+						</div>
+						<div class="hero-main-content">
+							<h3 class="hero-text">
+								MAGNOVITE<br />
+								2025
+							</h3>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -485,6 +570,80 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 	<script defer src="./src/script.js"></script>
 	<script>
+		// Mobile drawer + two-line hamburger
+		document.addEventListener('DOMContentLoaded', function(){
+			var toggle = document.querySelector('.nav-toggle-2');
+			var menu = document.getElementById('mobileMenu');
+			var backdrop = document.getElementById('navBackdrop');
+			var pageRoot = document.querySelector('.container.blur-target');
+			if (!toggle || !menu || !backdrop) return;
+			function setOpen(open){
+				menu.classList.toggle('is-open', open);
+				backdrop.classList.toggle('is-open', open);
+				toggle.classList.toggle('is-active', open);
+				toggle.setAttribute('aria-expanded', String(open));
+				if (pageRoot) {
+					if (open) {
+						document.documentElement.classList.add('is-nav-open');
+					} else {
+						document.documentElement.classList.remove('is-nav-open');
+					}
+				}
+			}
+			toggle.addEventListener('click', function(){ setOpen(!menu.classList.contains('is-open')); });
+			backdrop.addEventListener('click', function(){ setOpen(false); });
+			// Close when pressing ESC
+			document.addEventListener('keydown', function(e){ if (e.key === 'Escape') setOpen(false); });
+			// Close when clicking a link in the drawer
+			menu.addEventListener('click', function(e){
+				var t = e.target;
+				if (t && t.closest && t.closest('a.nav-link')) setOpen(false);
+			});
+		});
+
+		// Ensure background video auto-plays promptly on load and first interaction
+		(function(){
+			function tryPlayVideo(){
+				var vid = document.querySelector('.hero-main-image');
+				var hero = document.querySelector('.hero-1-container');
+				if (!vid) return;
+				try {
+					vid.muted = true; // reinforce autoplay policy
+					if (vid.readyState < 2) { // HAVE_CURRENT_DATA
+						vid.load();
+					}
+					var p = vid.play();
+					if (p && typeof p.then === 'function') {
+						p.catch(function(){ /* ignore - will retry on interaction */ });
+					}
+				} catch(_) {}
+				// When hero logo image loads, sync in the title reveal
+				var logoImg = document.querySelector('.hero-main-logo img');
+				if (logoImg && hero) {
+					if (logoImg.complete) {
+						hero.classList.add('hero-synced');
+					} else {
+						logoImg.addEventListener('load', function(){ hero.classList.add('hero-synced'); }, { once: true });
+					}
+				}
+			}
+
+			if (document.readyState === 'complete' || document.readyState === 'interactive') {
+				tryPlayVideo();
+			} else {
+				document.addEventListener('DOMContentLoaded', tryPlayVideo);
+			}
+
+			// Retry on first user interaction or visibility change
+			var once = function(fn){
+				var done = false; return function(){ if (done) return; done = true; fn(); };
+			};
+			var oneShot = once(tryPlayVideo);
+			['click','touchstart','scroll','keydown','visibilitychange'].forEach(function(evt){
+				window.addEventListener(evt, oneShot, { passive: true, once: true });
+			});
+		})();
+
 		// CTA Section JavaScript
 		document.addEventListener('DOMContentLoaded', function () {
 			// Scroll reveal animation for CTA section

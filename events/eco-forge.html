@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoForge – The Innovation Challenge • Magnovite 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: 'Poppins', Arial, Helvetica, sans-serif; background:#000; color:#e5e5e5; }
+        .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 16px 80px; }
+        .chip { display:inline-flex; align-items:center; padding:8px 12px; border-radius:999px; border:1px solid rgba(255,176,196,.45); background:rgba(0,0,0,.5); color:#fff; font-weight:600; font-size:14px; }
+        .title { font-size: clamp(28px, 4vw, 48px); font-weight:800; color:#fff; margin: 10px 0 6px; }
+        .tagline { color:#ffb0c4; font-weight:700; margin: 0 0 12px; }
+        .hero { border-radius:16px; overflow:hidden; border:1px solid rgba(255,176,196,.45); box-shadow: 0 18px 48px rgba(158,63,255,.28); }
+        .hero img { width:100%; height:100%; display:block; object-fit:cover; }
+        .grid { display:grid; gap:24px; grid-template-columns: 1fr; }
+        @media (min-width: 960px){ .grid{ grid-template-columns: 1.3fr 1fr; } }
+        .card { padding:18px; border-radius:14px; background:#0b0b0b; border:1px solid rgba(255,176,196,.35); }
+        .card h2 { margin: 0 0 10px; color:#fff; font-size:22px; }
+        /* Flow steps (uniform cards, no arrows) */
+        .flowchart { display:grid; gap:18px; grid-template-columns: repeat(5, 1fr); }
+        .node { position:relative; padding:14px 16px; border-radius:12px; background:#000; border:1px solid rgba(255,176,196,.35); box-shadow:0 10px 26px rgba(158,63,255,.18); min-height: 150px; display:flex; flex-direction:column; justify-content:space-between; }
+        .node .title { font-size:18px; margin:0; }
+        .node .meta { color:#ffb0c4; font-size:12px; font-weight:700; margin-top:4px; }
+        @media (max-width:1200px){ .flowchart{ grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width:720px){ .flowchart{ grid-template-columns: 1fr; } }
+        .rules { display:grid; gap:10px; grid-template-columns: 1fr; }
+        @media (min-width: 720px){ .rules{ grid-template-columns: 1fr 1fr; } }
+        .rule { display:flex; gap:10px; padding:10px; border-radius:10px; background:#000; border:1px solid rgba(255,176,196,.28); }
+        .dot{ width:10px; height:10px; border-radius:50%; background:#ff00ff; margin-top:6px; flex: 0 0 auto; }
+        .btn { display:inline-flex; align-items:center; gap:8px; padding:12px 16px; border-radius:999px; text-decoration:none; font-weight:800; color:#fff; background:linear-gradient(135deg,#9e3fff 0%, #ff00ff 100%); box-shadow:0 8px 22px rgba(158,63,255,.28); transition:.2s ease; }
+        .btn:hover{ transform: translateY(-2px); box-shadow:0 16px 36px rgba(158,63,255,.42); }
+        .subchips{ display:flex; gap:8px; flex-wrap:wrap; margin:12px 0; }
+        footer { margin-top:40px; padding:24px 0; }
+        .contacts { display:grid; gap:12px; grid-template-columns: 1fr; }
+        @media (min-width:720px){ .contacts{ grid-template-columns: 1fr 1fr 1fr; } }
+        .contact-card{ background:#0b0b0b; border:1px solid rgba(255,176,196,.35); border-radius:12px; padding:12px; }
+        .contact-card a{ color:#ffb0c4; text-decoration:none; }
+        /* Modal */
+        .modal { position: fixed; inset: 0; display: none; place-items: center; z-index: 5000; }
+        .modal.is-open { display: grid; }
+        .modal-backdrop { position:absolute; inset:0; background: rgba(0,0,0,.7); backdrop-filter: blur(5px); }
+        .modal-dialog { position:relative; width:min(92vw, 720px); background:#0b0b0b; border:1px solid rgba(255,176,196,.35); border-radius:16px; box-shadow:0 30px 80px rgba(0,0,0,.6); overflow:hidden; }
+        .modal-header { display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-bottom:1px solid rgba(255,176,196,.25); }
+        .modal-body { padding:18px; }
+        .close-btn { background:transparent; border:1px solid rgba(255,176,196,.35); color:#fff; border-radius:10px; padding:6px 10px; cursor:pointer; }
+        .form-grid { display:grid; gap:12px; grid-template-columns: 1fr; }
+        @media (min-width:720px){ .form-grid{ grid-template-columns: 1fr 1fr; } }
+        label { font-size:13px; color:#cfcfcf; display:block; margin-bottom:6px; }
+        input, select { width:100%; padding:10px 12px; border-radius:10px; border:1px solid rgba(255,176,196,.28); background:#000; color:#fff; }
+        .full { grid-column: 1 / -1; }
+        .help { font-size:12px; color:#9d9d9d; }
+        .actions { display:flex; gap:10px; justify-content:flex-end; margin-top:10px; }
+        /* hide arrow for fixed select */
+        select.no-arrow { -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: none; padding-right: 12px; cursor: default; }
+        select[disabled] { opacity: 1; color:#fff; border-color: rgba(255,176,196,.28); }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="subchips">
+            <span class="chip">Civil Engineering</span>
+            <span class="chip">Innovation</span>
+        </div>
+        <h1 class="title">ECOFORGE - THE INNOVATION CHALLENGE</h1>
+        <p class="tagline">“Turning bold ideas into impactful solutions.”</p>
+        <p>The event aims to encourage participants to think beyond the conventional use of waste and transform discarded items into innovative and meaningful models. By working with limited materials, teams will be challenged to apply creativity, resourcefulness, and design thinking to bring out unique concepts. The focus is not on functionality or technical accuracy but on imagination, innovation, and the ability to present ideas effectively. Through this challenge, participants will gain hands-on experience in problem-solving, teamwork, and sustainable thinking, while also learning to view waste as a resource for new possibilities.</p>
+
+        <div class="subchips">
+            <span class="chip">Team Size: 2–3 Members</span>
+            <span class="chip">Registration Fee: 350 INR Per Team</span>
+            <a class="btn" href="../events.html">← Back to Events</a>
+        </div>
+
+        <div class="grid" style="margin-top:16px;">
+            <div class="hero">
+                <img src="../public/events/ecoforge.jpg" alt="EcoForge" />
+            </div>
+            <div class="card">
+                <h2>Event Flow</h2>
+                <div class="flowchart">
+                    <div class="node">
+                        <p class="title">Briefing</p>
+                        <p class="meta">10 min</p>
+                        <p style="margin:6px 0 0; font-size:13px; color:#cfcfcf;">Rules, safety, and judging criteria.</p>
+                    </div>
+                    <div class="node">
+                        <p class="title">Material Selection</p>
+                        <p class="meta">10 min</p>
+                        <p style="margin:6px 0 0; font-size:13px; color:#cfcfcf;">Teams pick from Eco Material Pool.</p>
+                    </div>
+                    <div class="node">
+                        <p class="title">Construction / Design</p>
+                        <p class="meta">90 min</p>
+                        <p style="margin:6px 0 0; font-size:13px; color:#cfcfcf;">Build imaginative models with selected items.</p>
+                    </div>
+                    <div class="node">
+                        <p class="title">Presentation</p>
+                        <p class="meta">3 min/team</p>
+                        <p style="margin:6px 0 0; font-size:13px; color:#cfcfcf;">Pitch concept + explain relevance.</p>
+                    </div>
+                    <div class="node">
+                        <p class="title">Judging & Awards</p>
+                        <p class="meta">20 min</p>
+                        <p style="margin:6px 0 0; font-size:13px; color:#cfcfcf;">Panel evaluates using rubric.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top:24px;">
+            <h2>Rules & Regulations</h2>
+            <div class="rules">
+                <div class="rule"><span class="dot"></span><div>Each team must consist of 2–3 members only.</div></div>
+                <div class="rule"><span class="dot"></span><div>Teams will be given exactly 10 minutes to choose 7 items from the Waste Material Pool.</div></div>
+                <div class="rule"><span class="dot"></span><div>Once chosen, no exchange or return of materials will be allowed.</div></div>
+                <div class="rule"><span class="dot"></span><div>Teams must use only the provided kit and selected items – bringing necessary items such as scissors, cutter and other stationeries are permitted.</div></div>
+                <div class="rule"><span class="dot"></span><div>Safety first: Cutting tools, glass, or sharp objects must be handled with care. Organizers may intervene if unsafe practices are observed.</div></div>
+                <div class="rule"><span class="dot"></span><div>Models must be built within the 120-minute construction time. Late submissions will not be considered.</div></div>
+                <div class="rule"><span class="dot"></span><div>Teams must present their model within 3 minutes, failing which marks will be deducted.</div></div>
+                <div class="rule"><span class="dot"></span><div>Judging will be based on the official rubric only, and the judges’ decision will be final.</div></div>
+                <div class="rule"><span class="dot"></span><div>Participants are expected to maintain discipline and cleanliness at their workstations.</div></div>
+                <div class="rule"><span class="dot"></span><div>Any form of plagiarism, pre-prepared models, or unfair practices will lead to disqualification.</div></div>
+            </div>
+
+            <div style="display:flex; justify-content:flex-start; margin-top:16px;">
+                <button id="openRegister" class="btn">Register Now</button>
+            </div>
+
+        <footer class="wrap" style="padding-left:0;padding-right:0;">
+            <h2 class="title" style="font-size:28px; margin:0 0 12px;">Contact Us</h2>
+            <div class="contacts">
+                <div class="contact-card">
+                    <strong>Amandeep</strong><br />
+                    <a href="tel:+916376863225">6376 863 225</a>
+                </div>
+                <div class="contact-card">
+                    <strong>Ribi. S</strong><br />
+                    <a href="tel:+919345861539">93458 61539</a>
+                </div>
+                <div class="contact-card">
+                    <strong>Faculty Coordinator</strong><br />
+                    Arpan Pradhan – <a href="tel:+919439291900">9439291900</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Registration Modal (Civil Department, fixed to Eco-Forge) -->
+    <div class="modal" id="registerModal" aria-hidden="true">
+        <div class="modal-backdrop" id="closeBackdrop"></div>
+        <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <div class="modal-header">
+                <h3 id="modalTitle" style="margin:0; color:#fff;">Civil Engineering Registration</h3>
+                <button class="close-btn" id="closeModal">Close</button>
+            </div>
+            <form id="deptForm" class="modal-body">
+                <div class="form-grid">
+                    <div class="full">
+                        <label>Department</label>
+                        <input type="text" name="department" value="Civil Engineering" readonly />
+                    </div>
+                    <div class="full">
+                        <label>Select Event *</label>
+                        <select name="event" class="no-arrow" required>
+                            <option value="">Choose...</option>
+                            <option value="Archicraft 1.0">Archicraft 1.0</option>
+                            <option value="Eco-Forge">Eco-Forge</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Name of Team *</label>
+                        <input name="teamName" required />
+                    </div>
+                    <div>
+                        <label>Full Name of Participant/ POC *</label>
+                        <input name="pocName" required />
+                    </div>
+                    <div>
+                        <label>Contact Number (WhatsApp enabled) *</label>
+                        <input name="phone" type="tel" pattern="[0-9\s+()-]{8,15}" required />
+                    </div>
+                    <div>
+                        <label>No. of Team Members * (2–3 for Eco-Forge)</label>
+                        <input name="teamSize" type="number" min="2" max="3" value="2" required />
+                    </div>
+                    <div class="full">
+                        <label>Name of College/University *</label>
+                        <input name="college" required />
+                    </div>
+                    <div class="full">
+                        <label>Contingent / Non-contingent *</label>
+                        <select name="contingent" required>
+                            <option value="">Choose...</option>
+                            <option>Contingent</option>
+                            <option>Non-contingent</option>
+                        </select>
+                        <div class="help">One shared form per department (Civil) covering all events.</div>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button type="button" class="close-btn" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        (function(){
+            const openBtn = document.getElementById('openRegister');
+            const modal = document.getElementById('registerModal');
+            const closeBtn = document.getElementById('closeModal');
+            const closeBackdrop = document.getElementById('closeBackdrop');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const form = document.getElementById('deptForm');
+
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyQipsJ2kFu93nFHUIugL61GJrSpaLLbZHmhKesRPJ13yP7pCKom-JcOzYpgd2tMFZLnw/exec';
+
+            function open(){ modal.classList.add('is-open'); }
+            function close(){ modal.classList.remove('is-open'); }
+
+            openBtn.addEventListener('click', open);
+            closeBtn.addEventListener('click', close);
+            closeBackdrop.addEventListener('click', close);
+            cancelBtn.addEventListener('click', close);
+
+            // Fix event to current page (still submitted to same sheet)
+            const eventSelect = form.elements['event'];
+            const fixedEventName = 'Eco-Forge';
+            if (eventSelect) {
+                eventSelect.value = fixedEventName;
+                eventSelect.disabled = true;
+                const hiddenEvent = document.createElement('input');
+                hiddenEvent.type = 'hidden';
+                hiddenEvent.name = 'event';
+                hiddenEvent.value = fixedEventName;
+                form.appendChild(hiddenEvent);
+            }
+
+            // Enforce team size 2–3
+            const teamSizeInput = form.elements['teamSize'];
+            if (teamSizeInput) {
+                teamSizeInput.addEventListener('input', () => {
+                    const val = parseInt(teamSizeInput.value || '2', 10);
+                    if (val > 3) teamSizeInput.value = '3';
+                    if (val < 2 || isNaN(val)) teamSizeInput.value = '2';
+                });
+            }
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const data = new FormData(form);
+                const val = parseInt((data.get('teamSize')||'2'), 10);
+                if (val < 2 || val > 3) {
+                    alert('For Eco-Forge, team size must be 2 or 3 members.');
+                    return;
+                }
+                data.append('sourcePage', 'eco-forge');
+                // Fire-and-forget request; always show success to the user
+                if (SCRIPT_URL) {
+                    fetch(SCRIPT_URL, { method: 'POST', body: data })
+                        .then(async (res) => {
+                            const text = await res.text().catch(() => '');
+                            console.debug('[eco-forge] submit response:', res.status, text);
+                        })
+                        .catch((err) => console.error('[eco-forge] submit error:', err));
+                }
+                alert('Application submitted successfully. We will reach out on WhatsApp.');
+                form.reset();
+                close();
+            });
+        })();
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,47 @@
+.contact-div{
+    overflow: hidden !important;
+    position: relative !important;
+}
+.contact-grid{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+    width: 92.5%;
+    margin: 0 auto;
+}
+.contact-grid .contact-card{
+    background-color: rgba(255,255,255,0.05);
+    backdrop-filter: blur(4.8px);
+    border: 2px solid rgba(255,255,255,0.05);
+    border-radius: 10px;
+    padding: 10px;
+    height: calc(max(10vw, min(15vw, 200px))); 
+    width: 15vw;
+    text-align: center;
+}
+.contact-grid .contact-card h2{
+    color: #eee;
+}
+.contact-grid .contact-card span{
+    color: rgba(255,255,255,0.5);
+}
+.contact-grid .contact-card a {text-decoration: none;}
+.contact-grid .contact-card a span{
+    background: linear-gradient(90deg, #56A48F 0%, #4FFFE5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+@media only screen and (max-width:768px){
+    .contact-grid{
+        flex-direction: column;
+    }
+    .contact-card{
+        width: 75vw !important;
+        padding-bottom: 2.5vw;
+        height: fit-content !important;
+        margin-bottom: 10vw;
+    }
+}

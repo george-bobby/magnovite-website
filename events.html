@@ -2,19 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta
-			name="viewport"
-			content="width=de      .events-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        max-width: 1200px;
-        margin: 3rem auto;
-        padding: 0 2rem;
-        width: 100%;
-        box-sizing: border-box;
-      }th, initial-scale=1.0"
-		/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Events - Magnovite'25</title>
 		<link
 			rel="icon"
@@ -34,238 +22,30 @@
 			rel="stylesheet"
 		/>
 		<link rel="stylesheet" href="./src/style.css" />
-		<style>
-			/* Events page specific styles */
-			* {
-				box-sizing: border-box;
-				max-width: 100%;
-			}
+		<link rel="stylesheet" href="./css/events.css" />
+  	<style>
+  		/* Mobile drawer nav (match index) */
+  		@media (max-width: 768px) {
+  			.nav-toggle-2 { display:inline-flex; align-items:center; justify-content:center; width:42px; height:36px; margin-left:auto; border-radius:12px; border:1px solid rgba(255,255,255,0.18); background:rgba(0,0,0,0.35); cursor:pointer; position:relative; overflow:hidden; transform: translateX(14px); opacity: 0; animation: evSlideInBtn .35s ease .2s forwards; z-index: 1002; }
+  			.nav-toggle-2.is-active { position: fixed; top: 12px; right: 12px; transform: none; }
+  			@keyframes evSlideInBtn { to { transform: translateX(0); opacity:1; } }
+  			.nav-toggle-2__bar { position:absolute; left:50%; width:26px; height:4px; border-radius:3px; background:#ffffff; transform: translateX(-50%); transition: transform .25s ease, opacity .2s ease; }
+  			.nav-toggle-2__bar:nth-child(1){ top:11px; }
+  			.nav-toggle-2__bar:nth-child(2){ top:23px; }
+  			.nav-toggle-2.is-active .nav-toggle-2__bar:nth-child(1){ top:50%; transform: translate(-50%, -50%) rotate(45deg); }
+  			.nav-toggle-2.is-active .nav-toggle-2__bar:nth-child(2){ top:50%; transform: translate(-50%, -50%) rotate(-45deg); }
 
-			html {
-				overflow-x: hidden !important;
-				width: 100%;
-				max-width: 100vw;
-			}
-
-			body#events {
-				background: #000000;
-				color: #ffffff;
-				min-height: 100vh;
-				overflow-y: auto !important;
-				overflow-x: hidden !important;
-				width: 100% !important;
-				max-width: 100vw !important;
-				margin: 0;
-				padding: 0;
-			}
-
-			body#events .container {
-				background: #000000;
-				min-height: 100vh;
-				position: static;
-				width: 100%;
-				max-width: 100vw;
-				overflow-x: hidden;
-				padding: 0;
-				margin: 0;
-			}
-
-			.events-hero {
-				min-height: 100vh;
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-				text-align: center;
-				padding: 2rem;
-				background: radial-gradient(
-					circle at 50% 50%,
-					rgba(157, 47, 106, 0.3) 0%,
-					rgba(32, 31, 66, 0.5) 50%,
-					rgba(0, 0, 0, 0.8) 100%
-				);
-			}
-
-			.events-title {
-				font-size: clamp(3rem, 8vw, 8rem);
-				font-weight: 800;
-				color: #ffb0c4;
-				text-transform: uppercase;
-				letter-spacing: 0.1em;
-				margin-bottom: 2rem;
-				text-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-				line-height: 0.9;
-			}
-
-			.events-subtitle {
-				font-size: clamp(1.2rem, 3vw, 2rem);
-				color: rgba(255, 255, 255, 0.8);
-				margin-bottom: 3rem;
-				max-width: 800px;
-				line-height: 1.4;
-			}
-
-			/* Search functionality */
-			.search-container {
-				max-width: 600px;
-				margin: 2rem auto;
-				padding: 120px 2rem 0 2rem;
-				width: 100%;
-				box-sizing: border-box;
-			}
-
-			.search-input {
-				width: 100%;
-				padding: 1rem 1.5rem;
-				background: rgba(32, 31, 66, 0.3);
-				border: 2px solid rgba(157, 47, 106, 0.3);
-				border-radius: 50px;
-				color: #ffffff;
-				font-size: 1rem;
-				transition: all 0.3s ease;
-			}
-
-			.search-input::placeholder {
-				color: rgba(255, 255, 255, 0.5);
-			}
-
-			.search-input:focus {
-				outline: none;
-				background: rgba(32, 31, 66, 0.5);
-				border-color: rgba(157, 47, 106, 0.6);
-			}
-
-			.filter-tags {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 0.5rem;
-				justify-content: center;
-				margin: 1.5rem 0;
-			}
-
-			.filter-tag {
-				padding: 0.5rem 1rem;
-				background: rgba(32, 31, 66, 0.3);
-				border: 1px solid rgba(157, 47, 106, 0.3);
-				border-radius: 20px;
-				color: rgba(255, 255, 255, 0.7);
-				cursor: pointer;
-				transition: all 0.3s ease;
-				font-size: 0.85rem;
-			}
-
-			.filter-tag:hover,
-			.filter-tag.active {
-				background: rgba(157, 47, 106, 0.4);
-				border-color: rgba(157, 47, 106, 0.6);
-				color: #ffb0c4;
-			}
-
-			.events-grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-				gap: 2rem;
-				max-width: 1200px;
-				margin: 0 auto;
-				padding: 2rem;
-			}
-
-			.event-card {
-				background: rgba(32, 31, 66, 0.2);
-				border: 1px solid rgba(157, 47, 106, 0.2);
-				border-radius: 16px;
-				padding: 2rem;
-				backdrop-filter: blur(10px);
-				transition: all 0.3s ease;
-				text-align: left;
-			}
-
-			.event-card:hover {
-				background: rgba(32, 31, 66, 0.4);
-				border-color: rgba(157, 47, 106, 0.5);
-				transform: translateY(-4px);
-				box-shadow: 0 12px 40px rgba(157, 47, 106, 0.2);
-			}
-
-			.event-image {
-				width: 100%;
-				height: 200px;
-				object-fit: cover;
-				border-radius: 12px;
-				margin-bottom: 1rem;
-			}
-
-			.event-category {
-				display: inline-block;
-				background: rgba(255, 176, 196, 0.2);
-				color: #ffb0c4;
-				padding: 0.5rem 1rem;
-				border-radius: 20px;
-				font-size: 0.85rem;
-				font-weight: 600;
-				text-transform: uppercase;
-				letter-spacing: 0.05em;
-				margin-bottom: 1rem;
-			}
-
-			.event-title {
-				font-size: 1.5rem;
-				font-weight: 700;
-				color: #ffffff;
-				margin-bottom: 1rem;
-				line-height: 1.2;
-			}
-
-			.event-description {
-				color: rgba(255, 255, 255, 0.7);
-				line-height: 1.6;
-				margin-bottom: 1.5rem;
-			}
-
-			.event-details {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 1rem;
-				font-size: 0.9rem;
-				color: rgba(255, 255, 255, 0.6);
-			}
-
-			.register-btn {
-				background: linear-gradient(135deg, #9e3fff 0%, #ff00ff 100%);
-				color: #ffffff;
-				font-weight: 700;
-				padding: 12px 24px;
-				border: none;
-				border-radius: 25px;
-				cursor: pointer;
-				transition: all 0.3s ease;
-				text-decoration: none;
-				display: inline-block;
-				margin-top: 1rem;
-				box-shadow: 0 4px 15px rgba(158, 63, 255, 0.3);
-			}
-
-			.register-btn:hover {
-				background: linear-gradient(135deg, #ff00ff 0%, #9e3fff 100%);
-				transform: translateY(-2px);
-				box-shadow: 0 6px 20px rgba(158, 63, 255, 0.4);
-			}
-
-			@media (max-width: 768px) {
-				.events-grid {
-					grid-template-columns: 1fr;
-					padding: 1rem;
-				}
-
-				.event-card {
-					padding: 1.5rem;
-				}
-
-				.search-container {
-					padding: 0 1rem;
-				}
-			}
-		</style>
+  			.nav-drawer-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.35); backdrop-filter: blur(0px); opacity:0; visibility:hidden; transition: opacity .28s ease, visibility .28s ease, backdrop-filter .28s ease; z-index: 1000; }
+  			.nav-drawer-backdrop.is-open { opacity:1; visibility:visible; backdrop-filter: blur(8px); }
+  			.nav-menu__links { position: fixed; top:0; right:0; height:100vh; width:min(84vw, 320px); padding:14px; background: rgba(11,11,11,0.98); border-left:1px solid rgba(255,255,255,0.1); box-shadow: -24px 0 60px rgba(0,0,0,0.5); transform: translateX(100%); transition: transform .3s ease; z-index: 1001; display:flex; flex-direction:column; gap:6px; }
+  			.nav-menu__links.is-open { transform: translateX(0); padding-top: 64px; }
+  			.nav-menu__links .nav-link { display:flex; align-items:center; justify-content:space-between; padding:12px 12px; border-radius:10px; border:none !important; }
+  			.nav-menu__links .nav-link::after, .nav-menu__links .nav-link::before { content:none !important; }
+  		}
+  		/* Page blur when nav open */
+  		.blur-target { transition: filter .28s ease; }
+  		.is-nav-open .blur-target { filter: blur(8px); }
+  	</style>
 	</head>
 	<body id="events">
 		<!-- Navigation -->
@@ -284,8 +64,13 @@
 								class="nav-logo-img"
 							/>
 						</a>
-						<div class="nav-menu">
-							<div class="nav-menu__links">
+  <div class="nav-menu">
+    <div class="nav-drawer-backdrop" id="navBackdrop"></div>
+    <button class="nav-toggle-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span class="nav-toggle-2__bar"></span>
+      <span class="nav-toggle-2__bar"></span>
+    </button>
+    <div class="nav-menu__links" id="mobileMenu">
 								<a href="index.html" class="link nav-link">
 									<span class="nav-link-text">Home</span>
 									<svg
@@ -353,7 +138,11 @@
 			</div>
 		</header>
 
-		<div class="container">
+  <div class="container blur-target">
+			<div class="events-hero">
+				<h1 class="events-title">Events</h1>
+				<p class="events-subtitle">Explore management, technical, cultural and more. Click a card to view details; use Register for sign-ups.</p>
+			</div>
 			<!-- Search and Filter Section -->
 			<div class="search-container">
 				<input
@@ -453,263 +242,124 @@
 				</div>
 			</footer>
 		</div>
-	</body>
-	<script>
-		// Events data from magnovite-website-main
+</body>
+<script>
+  // Mobile drawer + blur
+  (function(){
+    var toggle = document.querySelector('.nav-toggle-2');
+    var menu = document.getElementById('mobileMenu');
+    var backdrop = document.getElementById('navBackdrop');
+    if (toggle && menu && backdrop) {
+      function setOpen(open){
+        menu.classList.toggle('is-open', open);
+        backdrop.classList.toggle('is-open', open);
+        toggle.classList.toggle('is-active', open);
+        toggle.setAttribute('aria-expanded', String(open));
+        if (open) document.documentElement.classList.add('is-nav-open'); else document.documentElement.classList.remove('is-nav-open');
+      }
+      toggle.addEventListener('click', function(){ setOpen(!menu.classList.contains('is-open')); });
+      backdrop.addEventListener('click', function(){ setOpen(false); });
+      document.addEventListener('keydown', function(e){ if (e.key==='Escape') setOpen(false); });
+      menu.addEventListener('click', function(e){ var t=e.target; if (t && t.closest && t.closest('a.nav-link')) setOpen(false); });
+    }
+  })();
+</script>
+<script>
+		function slugify(text) {
+			return text
+				.toString()
+				.toLowerCase()
+				.replace(/\s+/g, '-')
+				.replace(/[^a-z0-9-]/g, '')
+				.replace(/-+/g, '-')
+				.replace(/^-|-$/g, '');
+		}
+
+		// Events data (updated lineup)
 		const events = [
-			// Management Events
-			{
-				title: 'BEST MANAGEMENT TEAM',
-				desc: 'Compete in corporate strategy and team dynamics for top management honors.',
-				tags: ['management', 'strategy'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLScJzDO0MyrJQVtvmCkiVpC_OfH1da4TCWQiCck2Z1UYyqfYGQ/viewform',
-				img: './public/eventcards/bestmanagement.jpg',
-			},
-			{
-				title: 'CORPORATE SOCIAL RESPONSIBILITY',
-				desc: 'Explore the role of companies in making a positive societal impact.',
-				tags: ['management', 'social impact'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLScJzDO0MyrJQVtvmCkiVpC_OfH1da4TCWQiCck2Z1UYyqfYGQ/viewform',
-				img: './public/eventcards/corporatesocial.jpg',
-			},
-			{
-				title: 'BEST MANAGER',
-				desc: 'Showcase leadership skills through challenges in a competitive environment.',
-				tags: ['management', 'leadership'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLScJzDO0MyrJQVtvmCkiVpC_OfH1da4TCWQiCck2Z1UYyqfYGQ/viewform',
-				img: './public/eventcards/bestmanager.jpg',
-			},
-			{
-				title: 'FINANCE',
-				desc: 'Navigate complex financial scenarios in a competitive team-based event.',
-				tags: ['management', 'finance'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLScJzDO0MyrJQVtvmCkiVpC_OfH1da4TCWQiCck2Z1UYyqfYGQ/viewform',
-				img: './public/eventcards/finance.jpg',
-			},
-			{
-				title: 'HUMAN RESOURCES',
-				desc: 'Test HR knowledge and skills in recruitment, management, and organizational behavior.',
-				tags: ['management', 'hr'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLScJzDO0MyrJQVtvmCkiVpC_OfH1da4TCWQiCck2Z1UYyqfYGQ/viewform',
-				img: './public/eventcards/hr.jpg',
-			},
-			{
-				title: 'BUSINESS PLAN',
-				desc: 'Develop and present comprehensive business plans for innovative ventures.',
-				tags: ['management', 'entrepreneurship'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLScJzDO0MyrJQVtvmCkiVpC_OfH1da4TCWQiCck2Z1UYyqfYGQ/viewform',
-				img: './public/eventcards/businessplan.jpg',
-			},
-			{
-				title: 'MARKETING',
-				desc: 'Create compelling marketing strategies and campaigns for various products and services.',
-				tags: ['management', 'marketing'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLScJzDO0MyrJQVtvmCkiVpC_OfH1da4TCWQiCck2Z1UYyqfYGQ/viewform',
-				img: './public/eventcards/marketing.jpg',
-			},
-			{
-				title: 'BUSINESS QUIZ',
-				desc: 'Test your business acumen and knowledge across various domains.',
-				tags: ['management', 'quiz'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLScJzDO0MyrJQVtvmCkiVpC_OfH1da4TCWQiCck2Z1UYyqfYGQ/viewform',
-				img: './public/eventcards/businessquiz.jpg',
-			},
-			{
-				title: 'PUBLIC RELATIONS',
-				desc: 'Manage public image and communication strategies in crisis scenarios.',
-				tags: ['management', 'communication'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLScJzDO0MyrJQVtvmCkiVpC_OfH1da4TCWQiCck2Z1UYyqfYGQ/viewform',
-				img: './public/eventcards/pr.jpg',
-			},
-			{
-				title: 'COLLEGIATE',
-				desc: 'Inter-collegiate competition showcasing academic and professional skills.',
-				tags: ['management', 'academic'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLScJzDO0MyrJQVtvmCkiVpC_OfH1da4TCWQiCck2Z1UYyqfYGQ/viewform',
-				img: './public/eventcards/collegiate.jpg',
-			},
-			{
-				title: 'GLIMPSE INTO THE UNFOCUSED',
-				desc: 'An online photography competition based on assigned themes.',
-				tags: ['architecture', 'photography'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSeFH1mzF_tG5UojbuC-zJePwThP-PT33a1ysaRjbfHhB9SZjA/viewform',
-				img: './public/eventcards/glimpse.jpg',
-			},
+			// Civil Engineering
+			{ title: 'Archicraft 1.0', desc: 'Civil design and build challenge.', tags: ['civil'], link: '#', img: './public/events/archicraft.jpg' },
+			{ title: 'Eco-Forge', desc: 'Sustainable engineering problem-solving.', tags: ['civil'], link: '#', img: './public/events/ecoforge.jpg' },
 
-			// Technical Events
-			{
-				title: 'RC ROBOSOCCER 2.0',
-				desc: 'Build and program robots to play soccer and compete with other teams.',
-				tags: ['technical', 'robotics', 'engineering'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSeN7wq_nVIGBPyjSbk8m_9mFr0O0gwJJelPEUsPNugg-e_LdA/viewform',
-				img: './public/eventcards/robosoc.jpg',
-			},
-			{
-				title: 'MAZE – MERISE',
-				desc: 'Design an autonomous robot to navigate a maze efficiently.',
-				tags: ['technical', 'robotics', 'programming'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSeN7wq_nVIGBPyjSbk8m_9mFr0O0gwJJelPEUsPNugg-e_LdA/viewform',
-				img: './public/eventcards/maze.jpg',
-			},
-			{
-				title: 'ENIGMA REDESIGNED',
-				desc: 'A cryptographic challenge with multiple rounds of code-breaking and debugging.',
-				tags: ['technical', 'coding', 'cryptography'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSeN7wq_nVIGBPyjSbk8m_9mFr0O0gwJJelPEUsPNugg-e_LdA/viewform',
-				img: './public/eventcards/enigma.jpg',
-			},
-			{
-				title: 'SPARK-A-THON',
-				desc: 'Pitch innovative tech solutions through ideation and prototyping.',
-				tags: ['technical', 'innovation', 'pitching'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSeN7wq_nVIGBPyjSbk8m_9mFr0O0gwJJelPEUsPNugg-e_LdA/viewform',
-				img: './public/eventcards/spark.jpg',
-			},
-			{
-				title: 'SMART PITCH',
-				desc: 'Pitch civil engineering ideas with innovative business models.',
-				tags: ['technical', 'pitching', 'civil engineering'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSeN7wq_nVIGBPyjSbk8m_9mFr0O0gwJJelPEUsPNugg-e_LdA/viewform',
-				img: './public/eventcards/smartpitch.jpg',
-			},
-			{
-				title: 'INNOVATIVE CAD DESIGNER',
-				desc: 'Showcase creativity and skill in computer-aided design.',
-				tags: ['technical', 'design', 'CAD'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSeN7wq_nVIGBPyjSbk8m_9mFr0O0gwJJelPEUsPNugg-e_LdA/viewform',
-				img: './public/eventcards/cad.jpg',
-			},
-			{
-				title: 'THE GENTLEMAN BURGLAR',
-				desc: 'Simulate a bank heist through rounds focused on decryption, debugging, and circuit design.',
-				tags: ['technical', 'coding', 'circuit design'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSeN7wq_nVIGBPyjSbk8m_9mFr0O0gwJJelPEUsPNugg-e_LdA/viewform',
-				img: './public/eventcards/gentlemen.jpg',
-			},
-			{
-				title: 'OHM-AZING BUILD-A-THON',
-				desc: 'Timed circuit-building rounds to test electrical engineering skills.',
-				tags: ['technical', 'circuit design', 'engineering'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSeN7wq_nVIGBPyjSbk8m_9mFr0O0gwJJelPEUsPNugg-e_LdA/viewform',
-				img: './public/eventcards/ohmazing.jpg',
-			},
-			{
-				title: 'EV HACKATHON',
-				desc: 'Engage in electric vehicle challenges, from part identification to real-time battery monitoring.',
-				tags: ['technical', 'engineering', 'sustainability'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSeN7wq_nVIGBPyjSbk8m_9mFr0O0gwJJelPEUsPNugg-e_LdA/viewform',
-				img: './public/eventcards/evhackathon.jpg',
-			},
+			// Computer Science and Engineering
+			{ title: 'Enigma Redesigned', desc: 'Cryptography and code-breaking gauntlet.', tags: ['cse'], link: '#', img: 'https://source.unsplash.com/800x600/?cybersecurity,code,cryptography' },
+			{ title: 'SparkTank', desc: 'Pitch innovative tech ideas with business impact.', tags: ['cse'], link: '#', img: 'https://source.unsplash.com/800x600/?startup,pitch,innovation' },
+			{ title: 'Reverse Coding', desc: 'Decode outputs to reconstruct programs.', tags: ['cse'], link: '#', img: 'https://source.unsplash.com/800x600/?programming,algorithm,hacking' },
 
-			// Psychology Events
-			{
-				title: 'HOW I MET YOUR KILLER',
-				desc: 'Solve a fictional murder mystery through detective skills and teamwork.',
-				tags: ['psychology', 'mystery', 'teamwork'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSci6pUM6ma06tt3Jtf3OtZw_XFIth8vypqi6-XtjjUDPKZSgw/viewform',
-				img: './public/eventcards/kill.jpg',
-			},
-			{
-				title: 'AD-VENTURE',
-				desc: 'Reimagine ordinary products and pitch creative marketing campaigns.',
-				tags: ['psychology', 'creativity', 'marketing'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSci6pUM6ma06tt3Jtf3OtZw_XFIth8vypqi6-XtjjUDPKZSgw/viewform',
-				img: './public/eventcards/adventure.jpg',
-			},
-			{
-				title: 'Switch and Scene',
-				desc: 'Pairs of performers dive into spontaneous improv, facing sudden role reversals and genre changes.',
-				tags: ['psychology', 'creativity', 'theatre'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSci6pUM6ma06tt3Jtf3OtZw_XFIth8vypqi6-XtjjUDPKZSgw/viewform',
-				img: './public/eventcards/switch.jpg',
-			},
-			{
-				title: 'INK AND TALE',
-				desc: 'Create a captivating short story or comic based on assigned characters and genres.',
-				tags: ['psychology', 'creativity', 'storytelling'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSd89HjabndqYQd7GBVYeSbia3lVjZg-pUbfS7Xg9Fvyx9yQsA/viewform',
-				img: './public/eventcards/inktale.jpg',
-			},
+			// Electronics & Communications Engineering
+			{ title: 'The Antenna Odyssey', desc: 'Antenna design and communication challenge.', tags: ['ece'], link: '#', img: 'https://source.unsplash.com/800x600/?antenna,radio,communication' },
+			{ title: 'Drone Event', desc: 'Hands-on UAV tasks and piloting challenges.', tags: ['ece'], link: '#', img: 'https://source.unsplash.com/800x600/?drone,quadcopter,uav' },
 
-			// Debate
-			{
-				title: 'Convince and Conquer: The Art of Persuasion',
-				desc: 'A two-day event designed to challenge students to articulate and advocate for robust ideas on achieving academic and professional balance.',
-				tags: ['debate', 'academia'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSdqz6Gyk9WOKXyShoXbT7xHjuLadrF_CsHN3X2ELwpNbYwTTA/viewform',
-				img: './public/eventcards/debate.jpg',
-			},
+			// Electrical and Electronics Engineering
+			{ title: 'Grid Restoration Challenge', desc: 'Restore power grid scenarios under constraints.', tags: ['eee'], link: '#', img: 'https://source.unsplash.com/800x600/?power,grid,electricity' },
+			{ title: 'Smart City Energy Command', desc: 'Optimize energy for smart-city infrastructures.', tags: ['eee'], link: '#', img: 'https://source.unsplash.com/800x600/?smart-city,energy,grid' },
 
-			// Cultural Events
-			{
-				title: 'BATTLE OF BANDS',
-				desc: 'Showcase your musical talent in an energetic battle of bands competition.',
-				tags: ['cultural', 'music', 'performance'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSd89HjabndqYQd7GBVYeSbia3lVjZg-pUbfS7Xg9Fvyx9yQsA/viewform',
-				img: './public/eventcards/bob.JPG',
-			},
-			{
-				title: 'ACAPELLA AND GROUP SINGING',
-				desc: 'Team singing event celebrating vocal harmony and creativity.',
-				tags: ['cultural', 'music', 'singing'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSd89HjabndqYQd7GBVYeSbia3lVjZg-pUbfS7Xg9Fvyx9yQsA/viewform',
-				img: './public/eventcards/acapella.jpg',
-			},
-			{
-				title: 'SOLO SINGING (WESTERN)',
-				desc: 'Individual singing competition in the western music category.',
-				tags: ['cultural', 'music', 'western', 'solo'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSd89HjabndqYQd7GBVYeSbia3lVjZg-pUbfS7Xg9Fvyx9yQsA/viewform',
-				img: './public/eventcards/westernsolo.png',
-			},
-			{
-				title: 'SOLO SINGING (INDIAN)',
-				desc: 'Showcase talent in Indian music with solo singing performances.',
-				tags: ['cultural', 'music', 'solo', 'indian'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSd89HjabndqYQd7GBVYeSbia3lVjZg-pUbfS7Xg9Fvyx9yQsA/viewform',
-				img: './public/eventcards/indiansolo.JPG',
-			},
-			{
-				title: 'INDIAN GROUP DANCE',
-				desc: 'A group dance competition celebrating Indian dance forms.',
-				tags: ['cultural', 'dance', 'indian'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSd89HjabndqYQd7GBVYeSbia3lVjZg-pUbfS7Xg9Fvyx9yQsA/viewform',
-				img: './public/eventcards/indiangroup.jpg',
-			},
-			{
-				title: 'WESTERN GROUP DANCE',
-				desc: 'Group dance competition focusing on Western dance styles.',
-				tags: ['cultural', 'dance', 'Western'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSd89HjabndqYQd7GBVYeSbia3lVjZg-pUbfS7Xg9Fvyx9yQsA/viewform',
-				img: './public/eventcards/westerngroup.jpg',
-			},
-			{
-				title: 'SPOT CHOREOGRAPHY',
-				desc: 'A fast-paced choreography competition with on-the-spot themes.',
-				tags: ['cultural', 'dance', 'choreography'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSd89HjabndqYQd7GBVYeSbia3lVjZg-pUbfS7Xg9Fvyx9yQsA/viewform',
-				img: './public/eventcards/spotchoreo.JPG',
-			},
-			{
-				title: 'STREET PLAY',
-				desc: 'Perform compelling street theater with social or comedic themes.',
-				tags: ['cultural', 'theater', 'social'],
-				link: 'https://docs.google.com/forms/d/e/1FAIpQLSd89HjabndqYQd7GBVYeSbia3lVjZg-pUbfS7Xg9Fvyx9yQsA/viewform',
-				img: './public/eventcards/streetplay.jpg',
-			},
+			// Mechanical Engineering
+			{ title: 'Robosoccer', desc: 'Build and compete with soccer-playing robots.', tags: ['mech'], link: '#', img: 'https://source.unsplash.com/800x600/?robot,soccer,robotics' },
+			{ title: 'CAD Hackathon', desc: 'Rapid CAD design sprint.', tags: ['mech'], link: '#', img: 'https://source.unsplash.com/800x600/?cad,design,mechanical' },
+			{ title: 'Maze Runner', desc: 'Autonomous robot maze navigation.', tags: ['mech'], link: '#', img: 'https://source.unsplash.com/800x600/?maze,robot,automation' },
+
+			// Psychology
+			{ title: 'Frames Unboxed', desc: 'Two-day short film competition.', tags: ['psychology'], link: '#', img: 'https://source.unsplash.com/800x600/?filmmaking,cinema,clapperboard' },
+			{ title: 'How I Met Your Killer ?', desc: 'Mystery-solving and profiling event.', tags: ['psychology'], link: '#', img: 'https://source.unsplash.com/800x600/?mystery,detective,crime' },
+			{ title: 'Switch and Scene', desc: 'High-energy improv theatre showdown.', tags: ['psychology'], link: '#', img: 'https://source.unsplash.com/800x600/?theatre,improv,stage' },
+			{ title: 'The Nexus', desc: 'Negotiation-based strategy event.', tags: ['psychology'], link: '#', img: 'https://source.unsplash.com/800x600/?strategy,negotiation,alliance' },
+
+			// Automobile Engineering
+			{ title: 'RC Car Challenge', desc: 'Remote-controlled car design and races.', tags: ['automobile'], link: '#', img: 'https://source.unsplash.com/800x600/?rc,car,racing' },
+
+			// AIML & DS
+			{ title: 'Chamber of Secrets', desc: 'Puzzle and logic marathon.', tags: ['aiml-ds'], link: '#', img: 'https://source.unsplash.com/800x600/?puzzle,logic,escape' },
+			{ title: 'Algo Royale', desc: 'Competitive algorithms tournament.', tags: ['aiml-ds'], link: '#', img: 'https://source.unsplash.com/800x600/?algorithm,code,contest' },
+			{ title: 'Code Relay', desc: 'Team-based chained coding challenge.', tags: ['aiml-ds'], link: '#', img: 'https://source.unsplash.com/800x600/?coding,teamwork,software' },
+			{ title: 'Escape Room', desc: 'Timed puzzle-solving experience.', tags: ['aiml-ds'], link: '#', img: 'https://source.unsplash.com/800x600/?escape-room,puzzle,team' },
+
+			// Management
+			{ title: 'Best Manager', desc: 'Leadership marathon across rounds.', tags: ['management'], link: '#', img: 'https://source.unsplash.com/800x600/?leader,management,business' },
+			{ title: 'Business Plan', desc: 'Craft and present venture plans.', tags: ['management'], link: '#', img: 'https://source.unsplash.com/800x600/?business,plan,startup' },
+			{ title: 'Marketing and Public Relations', desc: 'Brand, PR and crisis strategy.', tags: ['management'], link: '#', img: 'https://source.unsplash.com/800x600/?marketing,pr,brand' },
+			{ title: 'Finance', desc: 'Financial analysis and strategy.', tags: ['management'], link: '#', img: 'https://source.unsplash.com/800x600/?finance,stocks,analysis' },
+			{ title: 'Human Resources', desc: 'Recruitment and organizational behavior.', tags: ['management'], link: '#', img: 'https://source.unsplash.com/800x600/?hr,people,team' },
+
+			// Science and Humanities
+			{ title: 'Severance Cup', desc: 'Interdisciplinary competitive challenge.', tags: ['science-humanities'], link: '#', img: 'https://source.unsplash.com/800x600/?trophy,competition,cup' },
+			{ title: 'Byte ard Board', desc: 'Hybrid of tech and board strategy.', tags: ['science-humanities'], link: '#', img: 'https://source.unsplash.com/800x600/?boardgame,technology,strategy' },
+
+			// School of Architecture
+			{ title: 'Pixel Perspectives', desc: 'Architectural visualization showcase.', tags: ['architecture'], link: '#', img: 'https://source.unsplash.com/800x600/?architecture,render,visualization' },
+			{ title: 'Pattern Play', desc: 'Parametric and pattern explorations.', tags: ['architecture'], link: '#', img: 'https://source.unsplash.com/800x600/?pattern,parametric,design' },
+			{ title: 'Revival Outlook', desc: 'Adaptive reuse and revival designs.', tags: ['architecture'], link: '#', img: 'https://source.unsplash.com/800x600/?heritage,architecture,revival' },
+
+			// IIIC
+			{ title: 'Casecraft: The Industry Edition', desc: 'Real-world case challenge by IIIC.', tags: ['iiic'], link: '#', img: 'https://source.unsplash.com/800x600/?case,industry,business' },
+
+			// Culturals
+			{ title: "Battle o' Bands", desc: 'High-voltage band face-off.', tags: ['culturals'], link: '#', img: 'https://source.unsplash.com/800x600/?band,concert,music' },
+			{ title: 'Acapella and Group Singing', desc: 'Harmony and vocal performance.', tags: ['culturals'], link: '#', img: 'https://source.unsplash.com/800x600/?choir,singing,acapella' },
+			{ title: 'Theme Dance', desc: 'Choreography with a concept.', tags: ['culturals'], link: '#', img: 'https://source.unsplash.com/800x600/?dance,stage,performance' },
+			{ title: 'Non Theme Dance', desc: 'Open-style group dance.', tags: ['culturals'], link: '#', img: 'https://source.unsplash.com/800x600/?dance,hiphop,group' },
+			{ title: 'Street Dance Battle', desc: 'Freestyle street battle.', tags: ['culturals'], link: '#', img: 'https://source.unsplash.com/800x600/?street,dance,battle' },
+			{ title: 'Street Play', desc: 'Powerful theater on the street.', tags: ['culturals'], link: '#', img: 'https://source.unsplash.com/800x600/?street,theatre,drama' },
 		];
 
 		let currentFilter = 'all';
 		let filteredEvents = events;
 
-		// Main categories only
+		// Main categories only (updated)
 		const mainCategories = [
-			'management',
-			'architecture',
-			'technical',
+			'civil',
+			'cse',
+			'ece',
+			'eee',
+			'mech',
 			'psychology',
-			'debate',
-			'cultural',
+			'automobile',
+			'aiml-ds',
+			'management',
+			'science-humanities',
+			'architecture',
+			'iiic',
+			'culturals',
 		];
 
 		// Initialize the page
@@ -746,25 +396,25 @@
 			}
 			container.innerHTML = '';
 
-			eventsList.forEach((event) => {
+			eventsList.forEach((evt) => {
 				const eventCard = document.createElement('div');
 				eventCard.className = 'event-card';
-
-				const primaryTag = event.tags[0];
+				const primaryTag = evt.tags[0];
+				const tagLabel = primaryTag.charAt(0).toUpperCase() + primaryTag.slice(1);
+                const detailUrl = `events/${encodeURIComponent(slugify(evt.title))}.html`;
 
 				eventCard.innerHTML = `
-          <img src="${event.img}" alt="${
-					event.title
-				}" class="event-image" loading="lazy">
-          <div class="event-category">${
-						primaryTag.charAt(0).toUpperCase() + primaryTag.slice(1)
-					}</div>
-          <h3 class="event-title">${event.title}</h3>
-          <p class="event-description">${event.desc}</p>
-          <div class="event-details">
-            <a href="${event.link}" target="_blank" class="register-btn">
-              Register Now
-            </a>
+					<a href="${detailUrl}" class="event-link" aria-label="Open ${evt.title}"></a>
+					<div class="event-media">
+						<img src="${evt.img}" alt="${evt.title}" class="event-image" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='./public/Gallery/1_400x400.jpg';" />
+						<span class="event-badge">${tagLabel}</span>
+					</div>
+					<div class="event-content">
+						<h3 class="event-title">${evt.title}</h3>
+						<p class="event-description">${evt.desc}</p>
+						<div class="event-actions">
+							<a href="${detailUrl}" class="register-btn">Show More</a>
+						</div>
           </div>
         `;
 
