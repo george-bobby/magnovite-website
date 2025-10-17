@@ -21,35 +21,132 @@
 			href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap"
 			rel="stylesheet"
 		/>
-	<link rel="stylesheet" href="./src/style.css" />
-	<link rel="stylesheet" href="./css/events.css" />
-  	<style>
-  		/* Hide mobile hamburger on desktop */
-  		.nav-toggle-2 { display:none; }
-  		.nav-toggle-2__bar { display:none; }
+		<link rel="stylesheet" href="./src/style.css" />
+		<link rel="stylesheet" href="./css/events.css" />
+		<style>
+			/* Hide mobile hamburger on desktop */
+			.nav-toggle-2 {
+				display: none;
+			}
+			.nav-toggle-2__bar {
+				display: none;
+			}
 
-  		/* Mobile drawer nav (match index) */
-  		@media (max-width: 768px) {
-  			.nav-toggle-2 { display:inline-flex; align-items:center; justify-content:center; width:42px; height:36px; margin-left:auto; border-radius:12px; border:1px solid rgba(255,255,255,0.18); background:rgba(0,0,0,0.35); cursor:pointer; position:relative; overflow:hidden; transform: translateX(14px); opacity: 0; animation: evSlideInBtn .35s ease .2s forwards; z-index: 1002; }
-  			.nav-toggle-2.is-active { position: fixed; top: 12px; right: 12px; transform: none; }
-  			@keyframes evSlideInBtn { to { transform: translateX(0); opacity:1; } }
-  			.nav-toggle-2__bar { position:absolute; left:50%; width:26px; height:4px; border-radius:3px; background:#ffffff; transform: translateX(-50%); transition: transform .25s ease, opacity .2s ease; }
-  			.nav-toggle-2__bar:nth-child(1){ top:11px; }
-  			.nav-toggle-2__bar:nth-child(2){ top:23px; }
-  			.nav-toggle-2.is-active .nav-toggle-2__bar:nth-child(1){ top:50%; transform: translate(-50%, -50%) rotate(45deg); }
-  			.nav-toggle-2.is-active .nav-toggle-2__bar:nth-child(2){ top:50%; transform: translate(-50%, -50%) rotate(-45deg); }
+			/* Mobile drawer nav (match index) */
+			@media (max-width: 768px) {
+				.nav-toggle-2 {
+					display: inline-flex;
+					align-items: center;
+					justify-content: center;
+					width: 42px;
+					height: 36px;
+					margin-left: auto;
+					border-radius: 12px;
+					border: 1px solid rgba(255, 255, 255, 0.18);
+					background: rgba(0, 0, 0, 0.35);
+					cursor: pointer;
+					position: relative;
+					overflow: hidden;
+					transform: translateX(14px);
+					opacity: 0;
+					animation: evSlideInBtn 0.35s ease 0.2s forwards;
+					z-index: 1002;
+				}
+				.nav-toggle-2.is-active {
+					position: fixed;
+					top: 12px;
+					right: 12px;
+					transform: none;
+				}
+				@keyframes evSlideInBtn {
+					to {
+						transform: translateX(0);
+						opacity: 1;
+					}
+				}
+				.nav-toggle-2__bar {
+					position: absolute;
+					left: 50%;
+					width: 26px;
+					height: 4px;
+					border-radius: 3px;
+					background: #ffffff;
+					transform: translateX(-50%);
+					transition: transform 0.25s ease, opacity 0.2s ease;
+				}
+				.nav-toggle-2__bar:nth-child(1) {
+					top: 11px;
+				}
+				.nav-toggle-2__bar:nth-child(2) {
+					top: 23px;
+				}
+				.nav-toggle-2.is-active .nav-toggle-2__bar:nth-child(1) {
+					top: 50%;
+					transform: translate(-50%, -50%) rotate(45deg);
+				}
+				.nav-toggle-2.is-active .nav-toggle-2__bar:nth-child(2) {
+					top: 50%;
+					transform: translate(-50%, -50%) rotate(-45deg);
+				}
 
-  			.nav-drawer-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.35); backdrop-filter: blur(0px); opacity:0; visibility:hidden; transition: opacity .28s ease, visibility .28s ease, backdrop-filter .28s ease; z-index: 1000; }
-  			.nav-drawer-backdrop.is-open { opacity:1; visibility:visible; backdrop-filter: blur(8px); }
-  			.nav-menu__links { position: fixed; top:0; right:0; height:100vh; width:min(84vw, 320px); padding:14px; background: rgba(11,11,11,0.98); border-left:1px solid rgba(255,255,255,0.1); box-shadow: -24px 0 60px rgba(0,0,0,0.5); transform: translateX(100%); transition: transform .3s ease; z-index: 1001; display:flex; flex-direction:column; gap:6px; }
-  			.nav-menu__links.is-open { transform: translateX(0); padding-top: 64px; }
-  			.nav-menu__links .nav-link { display:flex; align-items:center; justify-content:space-between; padding:12px 12px; border-radius:10px; border:none !important; }
-  			.nav-menu__links .nav-link::after, .nav-menu__links .nav-link::before { content:none !important; }
-  		}
-  		/* Page blur when nav open */
-  		.blur-target { transition: filter .28s ease; }
-  		.is-nav-open .blur-target { filter: blur(8px); }
-  	</style>
+				.nav-drawer-backdrop {
+					position: fixed;
+					inset: 0;
+					background: rgba(0, 0, 0, 0.35);
+					backdrop-filter: blur(0px);
+					opacity: 0;
+					visibility: hidden;
+					transition: opacity 0.28s ease, visibility 0.28s ease,
+						backdrop-filter 0.28s ease;
+					z-index: 1000;
+				}
+				.nav-drawer-backdrop.is-open {
+					opacity: 1;
+					visibility: visible;
+					backdrop-filter: blur(8px);
+				}
+				.nav-menu__links {
+					position: fixed;
+					top: 0;
+					right: 0;
+					height: 100vh;
+					width: min(84vw, 320px);
+					padding: 14px;
+					background: rgba(11, 11, 11, 0.98);
+					border-left: 1px solid rgba(255, 255, 255, 0.1);
+					box-shadow: -24px 0 60px rgba(0, 0, 0, 0.5);
+					transform: translateX(100%);
+					transition: transform 0.3s ease;
+					z-index: 1001;
+					display: flex;
+					flex-direction: column;
+					gap: 6px;
+				}
+				.nav-menu__links.is-open {
+					transform: translateX(0);
+					padding-top: 64px;
+				}
+				.nav-menu__links .nav-link {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					padding: 12px 12px;
+					border-radius: 10px;
+					border: none !important;
+				}
+				.nav-menu__links .nav-link::after,
+				.nav-menu__links .nav-link::before {
+					content: none !important;
+				}
+			}
+			/* Page blur when nav open */
+			.blur-target {
+				transition: filter 0.28s ease;
+			}
+			.is-nav-open .blur-target {
+				filter: blur(8px);
+			}
+		</style>
 	</head>
 	<body id="events">
 		<!-- Navigation -->
@@ -68,13 +165,18 @@
 								class="nav-logo-img"
 							/>
 						</a>
-  <div class="nav-menu">
-    <div class="nav-drawer-backdrop" id="navBackdrop"></div>
-    <button class="nav-toggle-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
-      <span class="nav-toggle-2__bar"></span>
-      <span class="nav-toggle-2__bar"></span>
-    </button>
-    <div class="nav-menu__links" id="mobileMenu">
+						<div class="nav-menu">
+							<div class="nav-drawer-backdrop" id="navBackdrop"></div>
+							<button
+								class="nav-toggle-2"
+								aria-label="Open menu"
+								aria-expanded="false"
+								aria-controls="mobileMenu"
+							>
+								<span class="nav-toggle-2__bar"></span>
+								<span class="nav-toggle-2__bar"></span>
+							</button>
+							<div class="nav-menu__links" id="mobileMenu">
 								<a href="index.html" class="link nav-link">
 									<span class="nav-link-text">Home</span>
 									<svg
@@ -142,11 +244,8 @@
 			</div>
 		</header>
 
-  <div class="container blur-target">
+		<div class="container blur-target">
 			<div class="events-hero">
-				<h1 class="events-title">Events</h1>
-				<p class="events-subtitle">Explore management, technical, cultural and more. Click a card to view details; use Register for sign-ups.</p>
-			</div>
 			<!-- Search and Filter Section -->
 			<div class="search-container">
 				<input
@@ -246,29 +345,39 @@
 				</div>
 			</footer>
 		</div>
-</body>
-<script>
-  // Mobile drawer + blur
-  (function(){
-    var toggle = document.querySelector('.nav-toggle-2');
-    var menu = document.getElementById('mobileMenu');
-    var backdrop = document.getElementById('navBackdrop');
-    if (toggle && menu && backdrop) {
-      function setOpen(open){
-        menu.classList.toggle('is-open', open);
-        backdrop.classList.toggle('is-open', open);
-        toggle.classList.toggle('is-active', open);
-        toggle.setAttribute('aria-expanded', String(open));
-        if (open) document.documentElement.classList.add('is-nav-open'); else document.documentElement.classList.remove('is-nav-open');
-      }
-      toggle.addEventListener('click', function(){ setOpen(!menu.classList.contains('is-open')); });
-      backdrop.addEventListener('click', function(){ setOpen(false); });
-      document.addEventListener('keydown', function(e){ if (e.key==='Escape') setOpen(false); });
-      menu.addEventListener('click', function(e){ var t=e.target; if (t && t.closest && t.closest('a.nav-link')) setOpen(false); });
-    }
-  })();
-</script>
-<script>
+	</body>
+	<script>
+		// Mobile drawer + blur
+		(function () {
+			var toggle = document.querySelector('.nav-toggle-2');
+			var menu = document.getElementById('mobileMenu');
+			var backdrop = document.getElementById('navBackdrop');
+			if (toggle && menu && backdrop) {
+				function setOpen(open) {
+					menu.classList.toggle('is-open', open);
+					backdrop.classList.toggle('is-open', open);
+					toggle.classList.toggle('is-active', open);
+					toggle.setAttribute('aria-expanded', String(open));
+					if (open) document.documentElement.classList.add('is-nav-open');
+					else document.documentElement.classList.remove('is-nav-open');
+				}
+				toggle.addEventListener('click', function () {
+					setOpen(!menu.classList.contains('is-open'));
+				});
+				backdrop.addEventListener('click', function () {
+					setOpen(false);
+				});
+				document.addEventListener('keydown', function (e) {
+					if (e.key === 'Escape') setOpen(false);
+				});
+				menu.addEventListener('click', function (e) {
+					var t = e.target;
+					if (t && t.closest && t.closest('a.nav-link')) setOpen(false);
+				});
+			}
+		})();
+	</script>
+	<script>
 		function slugify(text) {
 			return text
 				.toString()
@@ -282,68 +391,296 @@
 		// Events data (updated lineup)
 		const events = [
 			// Civil Engineering
-			{ title: 'Archicraft 1.0', desc: 'Civil design and build challenge.', tags: ['civil'], link: '#', img: './public/events/archicraft.jpg' },
-			{ title: 'Eco-Forge', desc: 'Sustainable engineering problem-solving.', tags: ['civil'], link: '#', img: './public/events/ecoforge.jpg' },
+			{
+				title: 'Archicraft 1.0',
+				desc: 'Civil design and build challenge.',
+				tags: ['civil'],
+				link: '#',
+				img: './public/events/archicraft.jpg',
+			},
+			{
+				title: 'Eco-Forge',
+				desc: 'Sustainable engineering problem-solving.',
+				tags: ['civil'],
+				link: '#',
+				img: './public/events/ecoforge.jpg',
+			},
 
 			// Computer Science and Engineering
-			{ title: 'Enigma Redesigned', desc: 'Cryptography and code-breaking gauntlet.', tags: ['cse'], link: '#', img: 'https://source.unsplash.com/800x600/?cybersecurity,code,cryptography' },
-			{ title: 'SparkTank', desc: 'Pitch innovative tech ideas with business impact.', tags: ['cse'], link: '#', img: 'https://source.unsplash.com/800x600/?startup,pitch,innovation' },
-			{ title: 'Reverse Coding', desc: 'Decode outputs to reconstruct programs.', tags: ['cse'], link: '#', img: 'https://source.unsplash.com/800x600/?programming,algorithm,hacking' },
+			{
+				title: 'Enigma Redesigned',
+				desc: 'Cryptography and code-breaking gauntlet.',
+				tags: ['cse'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?cybersecurity,code,cryptography',
+			},
+			{
+				title: 'SparkTank',
+				desc: 'Pitch innovative tech ideas with business impact.',
+				tags: ['cse'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?startup,pitch,innovation',
+			},
+			{
+				title: 'Reverse Coding',
+				desc: 'Decode outputs to reconstruct programs.',
+				tags: ['cse'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?programming,algorithm,hacking',
+			},
 
 			// Electronics & Communications Engineering
-			{ title: 'The Antenna Odyssey', desc: 'Antenna design and communication challenge.', tags: ['ece'], link: '#', img: 'https://source.unsplash.com/800x600/?antenna,radio,communication' },
-			{ title: 'Drone Event', desc: 'Hands-on UAV tasks and piloting challenges.', tags: ['ece'], link: '#', img: 'https://source.unsplash.com/800x600/?drone,quadcopter,uav' },
+			{
+				title: 'The Antenna Odyssey',
+				desc: 'Antenna design and communication challenge.',
+				tags: ['ece'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?antenna,radio,communication',
+			},
+			{
+				title: 'Drone Event',
+				desc: 'Hands-on UAV tasks and piloting challenges.',
+				tags: ['ece'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?drone,quadcopter,uav',
+			},
 
 			// Electrical and Electronics Engineering
-			{ title: 'Grid Restoration Challenge', desc: 'Restore power grid scenarios under constraints.', tags: ['eee'], link: '#', img: 'https://source.unsplash.com/800x600/?power,grid,electricity' },
-			{ title: 'Smart City Energy Command', desc: 'Optimize energy for smart-city infrastructures.', tags: ['eee'], link: '#', img: 'https://source.unsplash.com/800x600/?smart-city,energy,grid' },
+			{
+				title: 'Grid Restoration Challenge',
+				desc: 'Restore power grid scenarios under constraints.',
+				tags: ['eee'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?power,grid,electricity',
+			},
+			{
+				title: 'Smart City Energy Command',
+				desc: 'Optimize energy for smart-city infrastructures.',
+				tags: ['eee'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?smart-city,energy,grid',
+			},
 
 			// Mechanical Engineering
-			{ title: 'Robosoccer', desc: 'Build and compete with soccer-playing robots.', tags: ['mech'], link: '#', img: 'https://source.unsplash.com/800x600/?robot,soccer,robotics' },
-			{ title: 'CAD Hackathon', desc: 'Rapid CAD design sprint.', tags: ['mech'], link: '#', img: 'https://source.unsplash.com/800x600/?cad,design,mechanical' },
-			{ title: 'Maze Runner', desc: 'Autonomous robot maze navigation.', tags: ['mech'], link: '#', img: 'https://source.unsplash.com/800x600/?maze,robot,automation' },
+			{
+				title: 'Robosoccer',
+				desc: 'Build and compete with soccer-playing robots.',
+				tags: ['mech'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?robot,soccer,robotics',
+			},
+			{
+				title: 'CAD Hackathon',
+				desc: 'Rapid CAD design sprint.',
+				tags: ['mech'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?cad,design,mechanical',
+			},
+			{
+				title: 'Maze Runner',
+				desc: 'Autonomous robot maze navigation.',
+				tags: ['mech'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?maze,robot,automation',
+			},
 
 			// Psychology
-			{ title: 'Frames Unboxed', desc: 'Two-day short film competition.', tags: ['psychology'], link: '#', img: 'https://source.unsplash.com/800x600/?filmmaking,cinema,clapperboard' },
-			{ title: 'How I Met Your Killer ?', desc: 'Mystery-solving and profiling event.', tags: ['psychology'], link: '#', img: 'https://source.unsplash.com/800x600/?mystery,detective,crime' },
-			{ title: 'Switch and Scene', desc: 'High-energy improv theatre showdown.', tags: ['psychology'], link: '#', img: 'https://source.unsplash.com/800x600/?theatre,improv,stage' },
-			{ title: 'The Nexus', desc: 'Negotiation-based strategy event.', tags: ['psychology'], link: '#', img: 'https://source.unsplash.com/800x600/?strategy,negotiation,alliance' },
+			{
+				title: 'Frames Unboxed',
+				desc: 'Two-day short film competition.',
+				tags: ['psychology'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?filmmaking,cinema,clapperboard',
+			},
+			{
+				title: 'How I Met Your Killer ?',
+				desc: 'Mystery-solving and profiling event.',
+				tags: ['psychology'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?mystery,detective,crime',
+			},
+			{
+				title: 'Switch and Scene',
+				desc: 'High-energy improv theatre showdown.',
+				tags: ['psychology'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?theatre,improv,stage',
+			},
+			{
+				title: 'The Nexus',
+				desc: 'Negotiation-based strategy event.',
+				tags: ['psychology'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?strategy,negotiation,alliance',
+			},
 
 			// Automobile Engineering
-			{ title: 'RC Car Challenge', desc: 'Remote-controlled car design and races.', tags: ['automobile'], link: '#', img: 'https://source.unsplash.com/800x600/?rc,car,racing' },
+			{
+				title: 'RC Car Challenge',
+				desc: 'Remote-controlled car design and races.',
+				tags: ['automobile'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?rc,car,racing',
+			},
 
 			// AIML & DS
-			{ title: 'Chamber of Secrets', desc: 'Puzzle and logic marathon.', tags: ['aiml-ds'], link: '#', img: 'https://source.unsplash.com/800x600/?puzzle,logic,escape' },
-			{ title: 'Algo Royale', desc: 'Competitive algorithms tournament.', tags: ['aiml-ds'], link: '#', img: 'https://source.unsplash.com/800x600/?algorithm,code,contest' },
-			{ title: 'Code Relay', desc: 'Team-based chained coding challenge.', tags: ['aiml-ds'], link: '#', img: 'https://source.unsplash.com/800x600/?coding,teamwork,software' },
-			{ title: 'Escape Room', desc: 'Timed puzzle-solving experience.', tags: ['aiml-ds'], link: '#', img: 'https://source.unsplash.com/800x600/?escape-room,puzzle,team' },
+			{
+				title: 'Chamber of Secrets',
+				desc: 'Puzzle and logic marathon.',
+				tags: ['aiml-ds'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?puzzle,logic,escape',
+			},
+			{
+				title: 'Algo Royale',
+				desc: 'Competitive algorithms tournament.',
+				tags: ['aiml-ds'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?algorithm,code,contest',
+			},
+			{
+				title: 'Code Relay',
+				desc: 'Team-based chained coding challenge.',
+				tags: ['aiml-ds'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?coding,teamwork,software',
+			},
+			{
+				title: 'Escape Room',
+				desc: 'Timed puzzle-solving experience.',
+				tags: ['aiml-ds'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?escape-room,puzzle,team',
+			},
 
 			// Management
-			{ title: 'Best Manager', desc: 'Leadership marathon across rounds.', tags: ['management'], link: '#', img: 'https://source.unsplash.com/800x600/?leader,management,business' },
-			{ title: 'Business Plan', desc: 'Craft and present venture plans.', tags: ['management'], link: '#', img: 'https://source.unsplash.com/800x600/?business,plan,startup' },
-			{ title: 'Marketing and Public Relations', desc: 'Brand, PR and crisis strategy.', tags: ['management'], link: '#', img: 'https://source.unsplash.com/800x600/?marketing,pr,brand' },
-			{ title: 'Finance', desc: 'Financial analysis and strategy.', tags: ['management'], link: '#', img: 'https://source.unsplash.com/800x600/?finance,stocks,analysis' },
-			{ title: 'Human Resources', desc: 'Recruitment and organizational behavior.', tags: ['management'], link: '#', img: 'https://source.unsplash.com/800x600/?hr,people,team' },
+			{
+				title: 'Best Manager',
+				desc: 'Leadership marathon across rounds.',
+				tags: ['management'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?leader,management,business',
+			},
+			{
+				title: 'Business Plan',
+				desc: 'Craft and present venture plans.',
+				tags: ['management'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?business,plan,startup',
+			},
+			{
+				title: 'Marketing and Public Relations',
+				desc: 'Brand, PR and crisis strategy.',
+				tags: ['management'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?marketing,pr,brand',
+			},
+			{
+				title: 'Finance',
+				desc: 'Financial analysis and strategy.',
+				tags: ['management'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?finance,stocks,analysis',
+			},
+			{
+				title: 'Human Resources',
+				desc: 'Recruitment and organizational behavior.',
+				tags: ['management'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?hr,people,team',
+			},
 
 			// Science and Humanities
-			{ title: 'Severance Cup', desc: 'Interdisciplinary competitive challenge.', tags: ['science-humanities'], link: '#', img: 'https://source.unsplash.com/800x600/?trophy,competition,cup' },
-			{ title: 'Byte ard Board', desc: 'Hybrid of tech and board strategy.', tags: ['science-humanities'], link: '#', img: 'https://source.unsplash.com/800x600/?boardgame,technology,strategy' },
+			{
+				title: 'Severance Cup',
+				desc: 'Interdisciplinary competitive challenge.',
+				tags: ['science-humanities'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?trophy,competition,cup',
+			},
+			{
+				title: 'Byte ard Board',
+				desc: 'Hybrid of tech and board strategy.',
+				tags: ['science-humanities'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?boardgame,technology,strategy',
+			},
 
 			// School of Architecture
-			{ title: 'Pixel Perspectives', desc: 'Architectural visualization showcase.', tags: ['architecture'], link: '#', img: 'https://source.unsplash.com/800x600/?architecture,render,visualization' },
-			{ title: 'Pattern Play', desc: 'Parametric and pattern explorations.', tags: ['architecture'], link: '#', img: 'https://source.unsplash.com/800x600/?pattern,parametric,design' },
-			{ title: 'Revival Outlook', desc: 'Adaptive reuse and revival designs.', tags: ['architecture'], link: '#', img: 'https://source.unsplash.com/800x600/?heritage,architecture,revival' },
+			{
+				title: 'Pixel Perspectives',
+				desc: 'Architectural visualization showcase.',
+				tags: ['architecture'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?architecture,render,visualization',
+			},
+			{
+				title: 'Pattern Play',
+				desc: 'Parametric and pattern explorations.',
+				tags: ['architecture'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?pattern,parametric,design',
+			},
+			{
+				title: 'Revival Outlook',
+				desc: 'Adaptive reuse and revival designs.',
+				tags: ['architecture'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?heritage,architecture,revival',
+			},
 
 			// IIIC
-			{ title: 'Casecraft: The Industry Edition', desc: 'Real-world case challenge by IIIC.', tags: ['iiic'], link: '#', img: 'https://source.unsplash.com/800x600/?case,industry,business' },
+			{
+				title: 'Casecraft: The Industry Edition',
+				desc: 'Real-world case challenge by IIIC.',
+				tags: ['iiic'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?case,industry,business',
+			},
 
 			// Culturals
-			{ title: "Battle o' Bands", desc: 'High-voltage band face-off.', tags: ['culturals'], link: '#', img: 'https://source.unsplash.com/800x600/?band,concert,music' },
-			{ title: 'Acapella and Group Singing', desc: 'Harmony and vocal performance.', tags: ['culturals'], link: '#', img: 'https://source.unsplash.com/800x600/?choir,singing,acapella' },
-			{ title: 'Theme Dance', desc: 'Choreography with a concept.', tags: ['culturals'], link: '#', img: 'https://source.unsplash.com/800x600/?dance,stage,performance' },
-			{ title: 'Non Theme Dance', desc: 'Open-style group dance.', tags: ['culturals'], link: '#', img: 'https://source.unsplash.com/800x600/?dance,hiphop,group' },
-			{ title: 'Street Dance Battle', desc: 'Freestyle street battle.', tags: ['culturals'], link: '#', img: 'https://source.unsplash.com/800x600/?street,dance,battle' },
-			{ title: 'Street Play', desc: 'Powerful theater on the street.', tags: ['culturals'], link: '#', img: 'https://source.unsplash.com/800x600/?street,theatre,drama' },
+			{
+				title: "Battle o' Bands",
+				desc: 'High-voltage band face-off.',
+				tags: ['culturals'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?band,concert,music',
+			},
+			{
+				title: 'Acapella and Group Singing',
+				desc: 'Harmony and vocal performance.',
+				tags: ['culturals'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?choir,singing,acapella',
+			},
+			{
+				title: 'Theme Dance',
+				desc: 'Choreography with a concept.',
+				tags: ['culturals'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?dance,stage,performance',
+			},
+			{
+				title: 'Non Theme Dance',
+				desc: 'Open-style group dance.',
+				tags: ['culturals'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?dance,hiphop,group',
+			},
+			{
+				title: 'Street Dance Battle',
+				desc: 'Freestyle street battle.',
+				tags: ['culturals'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?street,dance,battle',
+			},
+			{
+				title: 'Street Play',
+				desc: 'Powerful theater on the street.',
+				tags: ['culturals'],
+				link: '#',
+				img: 'https://source.unsplash.com/800x600/?street,theatre,drama',
+			},
 		];
 
 		let currentFilter = 'all';
@@ -404,8 +741,11 @@
 				const eventCard = document.createElement('div');
 				eventCard.className = 'event-card';
 				const primaryTag = evt.tags[0];
-				const tagLabel = primaryTag.charAt(0).toUpperCase() + primaryTag.slice(1);
-                const detailUrl = `events/${encodeURIComponent(slugify(evt.title))}.html`;
+				const tagLabel =
+					primaryTag.charAt(0).toUpperCase() + primaryTag.slice(1);
+				const detailUrl = `events/${encodeURIComponent(
+					slugify(evt.title)
+				)}.html`;
 
 				eventCard.innerHTML = `
 					<a href="${detailUrl}" class="event-link" aria-label="Open ${evt.title}"></a>
